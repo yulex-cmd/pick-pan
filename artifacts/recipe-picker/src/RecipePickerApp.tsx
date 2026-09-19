@@ -393,6 +393,73 @@ const modes: { id: Mode; label: string; description: string; mark: string }[] = 
 
 const ingredientById = new Map(ingredients.map((item) => [item.id, item]));
 
+type SpreadsheetRecipe = {
+  title: string;
+  cuisine: string;
+  required: string[];
+  method: RecipeMethod;
+  time: number;
+  audience: RecipeAudience[];
+  icon: LucideIcon;
+  accent: string;
+};
+
+// Imported from the user's recipe workbook. Tomato egg rice already exists above
+// as a detailed recipe, so the rest of the workbook becomes the expanded catalog.
+const spreadsheetRecipes: SpreadsheetRecipe[] = [
+  { title: 'Beef and Broccoli Stir-Fry', cuisine: 'East Asian', required: ['beef', 'broccoli', 'garlic'], method: 'stir-fry', time: 20, audience: ['high-protein', 'beginner'], icon: Utensils, accent: '#6e9541' },
+  { title: 'Beef and Bell Pepper Stir-Fry', cuisine: 'East Asian', required: ['beef', 'bell-pepper', 'onion'], method: 'stir-fry', time: 20, audience: ['high-protein', 'beginner'], icon: Utensils, accent: '#c87952' },
+  { title: 'Spaghetti Bolognese', cuisine: 'Italian', required: ['ground-beef', 'pasta', 'tomato', 'onion'], method: 'stir-fry', time: 35, audience: ['comfort'], icon: Soup, accent: '#b8753b' },
+  { title: 'Beef Tacos', cuisine: 'Mexican / Tex-Mex', required: ['ground-beef', 'tortilla', 'tomato'], method: 'stir-fry', time: 25, audience: ['beginner', 'high-protein'], icon: Utensils, accent: '#e06b3f' },
+  { title: 'Beef Keema', cuisine: 'South Asian', required: ['ground-beef', 'onion', 'tomato', 'peas'], method: 'stir-fry', time: 35, audience: ['high-protein', 'comfort'], icon: CookingPot, accent: '#c69032' },
+  { title: 'Beef Kofta Rice Bowl', cuisine: 'Middle Eastern', required: ['ground-beef', 'rice', 'onion', 'yogurt'], method: 'oven', time: 35, audience: ['high-protein', 'comfort'], icon: CookingPot, accent: '#8f6e4b' },
+  { title: 'Pork and Cabbage Stir-Fry', cuisine: 'East Asian', required: ['pork', 'cabbage', 'carrot'], method: 'stir-fry', time: 20, audience: ['high-protein', 'beginner'], icon: Utensils, accent: '#58a474' },
+  { title: 'Mapo Tofu with Pork', cuisine: 'Chinese', required: ['ground-pork', 'tofu', 'chili-bean-paste'], method: 'stir-fry', time: 25, audience: ['high-protein', 'comfort'], icon: Flame, accent: '#d97755' },
+  { title: 'Pork Fried Rice', cuisine: 'East Asian', required: ['pork', 'rice', 'eggs', 'carrot'], method: 'stir-fry', time: 25, audience: ['high-protein', 'beginner'], icon: CookingPot, accent: '#c69032' },
+  { title: 'Filipino Pork Adobo', cuisine: 'Filipino', required: ['pork', 'soy-sauce', 'vinegar', 'garlic'], method: 'stir-fry', time: 40, audience: ['high-protein', 'comfort'], icon: CookingPot, accent: '#8f6e4b' },
+  { title: 'Garlic Pork Chops', cuisine: 'European / American', required: ['pork-chops', 'garlic', 'potato'], method: 'stir-fry', time: 30, audience: ['high-protein', 'beginner'], icon: Utensils, accent: '#b8753b' },
+  { title: 'Chicken and Mushroom Stir-Fry', cuisine: 'East Asian', required: ['chicken', 'mushroom', 'onion'], method: 'stir-fry', time: 20, audience: ['high-protein', 'beginner'], icon: Utensils, accent: '#6e9541' },
+  { title: 'Chicken Curry', cuisine: 'South Asian', required: ['chicken', 'onion', 'tomato'], method: 'stir-fry', time: 35, audience: ['high-protein', 'comfort'], icon: Flame, accent: '#e06b3f' },
+  { title: 'Chicken Quesadilla', cuisine: 'Mexican / Tex-Mex', required: ['chicken', 'tortilla', 'cheese'], method: 'stir-fry', time: 20, audience: ['beginner', 'comfort'], icon: Utensils, accent: '#dcae35' },
+  { title: 'Chicken Shawarma Rice Bowl', cuisine: 'Middle Eastern', required: ['chicken', 'rice', 'cucumber', 'yogurt'], method: 'stir-fry', time: 30, audience: ['high-protein', 'comfort'], icon: CookingPot, accent: '#c87952' },
+  { title: 'Thai Basil Chicken', cuisine: 'Thai', required: ['ground-chicken', 'basil', 'garlic'], method: 'stir-fry', time: 20, audience: ['high-protein', 'beginner'], icon: Leaf, accent: '#58a474' },
+  { title: 'Chicken Vegetable Soup', cuisine: 'European / American', required: ['chicken', 'potato', 'carrot', 'onion'], method: 'boil', time: 40, audience: ['comfort'], icon: Soup, accent: '#6e9541' },
+  { title: 'Garlic Shrimp Pasta', cuisine: 'Mediterranean', required: ['shrimp', 'pasta', 'garlic', 'tomato'], method: 'stir-fry', time: 25, audience: ['high-protein', 'beginner'], icon: Fish, accent: '#d97755' },
+  { title: 'Shrimp Fried Rice', cuisine: 'East Asian', required: ['shrimp', 'rice', 'eggs', 'carrot'], method: 'stir-fry', time: 25, audience: ['high-protein', 'beginner'], icon: Fish, accent: '#c69032' },
+  { title: 'Fish Tacos', cuisine: 'Mexican', required: ['fish', 'tortilla', 'cabbage'], method: 'stir-fry', time: 25, audience: ['beginner', 'high-protein'], icon: Fish, accent: '#58a474' },
+  { title: 'Baked Fish and Potatoes', cuisine: 'Mediterranean', required: ['fish', 'potato', 'tomato'], method: 'oven', time: 35, audience: ['high-protein', 'comfort'], icon: Fish, accent: '#b8753b' },
+  { title: 'Tofu Broccoli Stir-Fry', cuisine: 'East Asian', required: ['tofu', 'broccoli', 'garlic'], method: 'stir-fry', time: 20, audience: ['beginner', 'comfort'], icon: Bean, accent: '#6e9541' },
+  { title: 'Chana Masala', cuisine: 'South Asian', required: ['chickpeas', 'tomato', 'onion'], method: 'stir-fry', time: 35, audience: ['comfort'], icon: Bean, accent: '#c69032' },
+  { title: 'Shakshuka', cuisine: 'Middle Eastern / North African', required: ['eggs', 'tomato', 'bell-pepper'], method: 'stir-fry', time: 25, audience: ['beginner', 'comfort'], icon: Egg, accent: '#e06b3f' },
+  { title: 'Mujadara', cuisine: 'Middle Eastern', required: ['lentils', 'rice', 'onion'], method: 'boil', time: 40, audience: ['comfort'], icon: Bean, accent: '#8f6e4b' },
+  { title: 'Pasta al Pomodoro', cuisine: 'Italian', required: ['pasta', 'tomato', 'garlic'], method: 'boil', time: 25, audience: ['beginner', 'comfort'], icon: Soup, accent: '#e06b3f' },
+  { title: 'Black Bean Tacos', cuisine: 'Mexican / Tex-Mex', required: ['black-beans', 'tortilla', 'tomato'], method: 'stir-fry', time: 20, audience: ['beginner', 'comfort'], icon: Bean, accent: '#8f6e4b' },
+  { title: 'Thai Coconut Vegetable Curry', cuisine: 'Thai', required: ['coconut-milk', 'carrot', 'bell-pepper'], method: 'stir-fry', time: 30, audience: ['beginner', 'comfort'], icon: CookingPot, accent: '#6e9541' },
+  { title: 'Spanish Tortilla', cuisine: 'Spanish', required: ['potato', 'eggs', 'onion'], method: 'stir-fry', time: 35, audience: ['beginner', 'comfort'], icon: Egg, accent: '#c69032' },
+];
+
+const makeSpreadsheetRecipe = (recipe: SpreadsheetRecipe): Recipe => ({
+  id: `sheet-${recipe.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`,
+  title: recipe.title,
+  description: `A ${recipe.cuisine} kitchen idea built around ${recipe.required.map((id) => ingredientById.get(id)?.label.toLowerCase() ?? id).join(', ')}.`,
+  time: recipe.time,
+  method: recipe.method,
+  tags: [recipe.cuisine, 'from your recipe sheet'],
+  audience: recipe.audience,
+  required: recipe.required,
+  optional: [],
+  accent: recipe.accent,
+  icon: recipe.icon,
+  baseServings: 2,
+  ingredients: recipe.required.map((id) => ({ id, label: ingredientById.get(id)?.label ?? id, quantity: 1, unit: 'as needed' })),
+  steps: [
+    { title: 'Recipe sheet reference', instruction: 'Your recipe sheet lists the main ingredients, but does not provide quantities or cooking instructions. Use the YouTube tutorial link for the full method. Times shown are estimates.' },
+  ],
+  substitutes: [],
+});
+
+const allRecipes: Recipe[] = [...recipes, ...spreadsheetRecipes.map(makeSpreadsheetRecipe)];
+
 function SectionHeading({ number, eyebrow, title, children }: { number: string; eyebrow: string; title: string; children?: ReactNode }) {
   return (
     <div className="mb-4 flex items-start justify-between gap-3">
@@ -447,7 +514,7 @@ function FilterButton({ active, children, onClick }: { active: boolean; children
 function RecipeCard({ recipe, index, match, onOpen }: { recipe: Recipe; index: number; match: MatchInfo; onOpen: () => void }) {
   const Icon = recipe.icon;
   const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${recipe.title} easy recipe`)}`;
-  const statusLabel = match.status === 'complete' ? '100% match' : match.status === 'partial' ? `${match.missing.length} to pick up` : match.status === 'blocked' ? 'Not for you today' : 'Flexible idea';
+  const statusLabel = match.status === 'complete' ? '100% match' : match.status === 'partial' ? `${match.score}% match · ${match.missing.length} to pick up` : match.status === 'blocked' ? 'Not for you today' : `${match.score}% match`;
   return (
     <article className="result-card overflow-hidden rounded-[22px] border border-[#ded6c8] bg-[#fffdf8] shadow-[0_12px_28px_rgba(79,58,35,0.06)]" style={{ animationDelay: `${index * 70}ms` }} data-testid={`card-recipe-${recipe.id}`}>
       <div className="h-1.5" style={{ backgroundColor: recipe.accent }} />
@@ -512,7 +579,7 @@ function RecipeDetail({ recipe, match, servings, onServings, wakeLockActive, onW
             </div>
             <div className="mt-4 rounded-2xl border border-[#e0d5c4] bg-[#fbf8f1] p-4">
               <div className="mb-3 flex items-center justify-between"><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8f7d69]">ingredients</p><span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${match.status === 'complete' ? 'bg-[#e8f0da] text-[#195d44]' : 'bg-[#f8ead6] text-[#99713c]'}`}>{match.status === 'complete' ? 'ready to cook' : `add ${match.missing.length}`}</span></div>
-              <ul className="space-y-2">{recipe.ingredients.map((item) => <li key={item.id} className="flex items-center justify-between gap-3 text-[12px] text-[#5e5042]"><span>{item.label}</span><span className="font-mono text-[11px] text-[#8d7a66]">{amount(item.quantity * servings / recipe.baseServings)} {item.unit}</span></li>)}</ul>
+              <ul className="space-y-2">{recipe.ingredients.map((item) => <li key={item.id} className="flex items-center justify-between gap-3 text-[12px] text-[#5e5042]"><span>{item.label}</span><span className="font-mono text-[11px] text-[#8d7a66]">{item.unit === 'as needed' ? 'as needed' : `${amount(item.quantity * servings / recipe.baseServings)} ${item.unit}`}</span></li>)}</ul>
               {match.missing.length > 0 && <p className="mt-3 border-t border-[#eee5d8] pt-3 text-[11px] leading-5 text-[#99713c]">Missing items can often be swapped. Check the note on the recipe card before you shop.</p>}
             </div>
             <div className="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-[#d7e2cb] bg-[#edf4e4] p-4"><div className="flex items-center gap-3"><span className="flex size-9 items-center justify-center rounded-xl bg-[#dbe9cb] text-[#195d44]"><ShieldCheck size={17} /></span><div><p className="text-[12px] font-semibold text-[#315d43]">Keep screen awake</p><p className="mt-0.5 text-[10px] text-[#66816d]">{wakeLockActive ? 'Screen lock is active.' : 'Helpful when your hands are messy.'}</p></div></div><button type="button" onClick={onWakeLock} className={`rounded-full px-3 py-2 text-[11px] font-semibold ${wakeLockActive ? 'bg-[#195d44] text-[#fffaf1]' : 'bg-[#fffaf1] text-[#35674b]'}`}>{wakeLockActive ? 'On' : 'Turn on'}</button></div>
@@ -553,8 +620,8 @@ export default function RecipePickerApp() {
   const allOptions = useMemo(() => ingredients.map((item) => ({ id: item.id, label: item.label, note: item.note, icon: item.icon })), []);
   const selectedLabels = selected.map((id) => ingredientById.get(id)?.label).filter(Boolean) as string[];
   const customResolvedIds = useMemo(() => customItems.flatMap((item) => {
-    const query = item.toLowerCase();
-    return ingredients.filter((ingredient) => ingredient.aliases.some((alias) => query.includes(alias.toLowerCase()))).map((ingredient) => ingredient.id);
+    const query = item.trim().toLowerCase();
+    return ingredients.filter((ingredient) => [ingredient.label, ...ingredient.aliases].some((alias) => query === alias.toLowerCase())).map((ingredient) => ingredient.id);
   }), [customItems]);
   const ownedIds = useMemo(() => new Set([...selected, ...customResolvedIds, ...defaultPantry]), [customResolvedIds, selected]);
 
@@ -570,8 +637,9 @@ export default function RecipePickerApp() {
   const matchesSearch = (ingredient: Ingredient) => !normalizedSearch || [ingredient.label, ingredient.note, ...ingredient.aliases].some((value) => value.toLowerCase().includes(normalizedSearch));
   const filteredCategories = categories.map((category) => ({ ...category, options: category.ids.map((id) => ingredientById.get(id)).filter((item): item is Ingredient => Boolean(item && matchesSearch(item))) })).filter((category) => category.options.length > 0);
 
-  const toggleIngredient = (id: string) => {
-    if (entryMode === 'avoid') {
+  const toggleIngredient = (id: string, targetMode: EntryMode = entryMode) => {
+    setGenerated(false);
+    if (targetMode === 'avoid') {
       setAvoided((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
       setSelected((current) => current.filter((item) => item !== id));
     } else {
@@ -594,7 +662,7 @@ export default function RecipePickerApp() {
   const removeCustom = (value: string) => setCustomItems((current) => current.filter((item) => item !== value));
 
   const getMatch = (recipe: Recipe): MatchInfo => {
-    const blocked = recipe.required.some((id) => avoided.includes(id));
+    const blocked = [...recipe.required, ...recipe.optional, ...recipe.ingredients.map((item) => item.id)].some((id) => avoided.includes(id));
     const missingIds = recipe.required.filter((id) => !ownedIds.has(id));
     const missing = missingIds.map((id) => ingredientById.get(id)?.label ?? id);
     const substituteHints = recipe.substitutes.filter((item) => missing.some((label) => label.toLowerCase() === item.missing.toLowerCase())).map((item) => `${item.missing} → ${item.replacement}`);
@@ -604,21 +672,25 @@ export default function RecipePickerApp() {
 
   const displayedRecipes = useMemo(() => {
     const priority = { complete: 0, partial: 1, stretch: 2, blocked: 3 };
-    return recipes
+    const chosen = new Set([...selected.filter((id) => ingredientById.has(id)), ...customResolvedIds]);
+    return allRecipes
+      .filter((recipe) => chosen.size > 0 && recipe.required.some((id) => chosen.has(id)))
       .filter((recipe) => timeFilter === 'all' || (timeFilter === 'quick' ? recipe.time <= 20 : recipe.time > 20))
       .filter((recipe) => methodFilter === 'all' || recipe.method === methodFilter)
       .filter((recipe) => audienceFilter === 'all' || recipe.audience.includes(audienceFilter))
-      .filter((recipe) => mode !== 'strict' || !recipe.required.some((id) => avoided.includes(id)))
+      .filter((recipe) => getMatch(recipe).status !== 'blocked')
+      .filter((recipe) => mode !== 'strict' || getMatch(recipe).missing.length === 0)
       .sort((a, b) => {
         const aMatch = getMatch(a);
         const bMatch = getMatch(b);
+        if (priority[aMatch.status] !== priority[bMatch.status]) return priority[aMatch.status] - priority[bMatch.status];
+        if (bMatch.score !== aMatch.score) return bMatch.score - aMatch.score;
         if (clearFridge && aMatch.usedUrgent !== bMatch.usedUrgent) return aMatch.usedUrgent ? -1 : 1;
         if (mode === 'survival' && a.time !== b.time) return a.time - b.time;
         return priority[aMatch.status] - priority[bMatch.status] || bMatch.score - aMatch.score;
-      })
-      .slice(0, 6);
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [audienceFilter, avoided, clearFridge, methodFilter, mode, ownedIds, timeFilter, urgent]);
+   }, [audienceFilter, avoided, clearFridge, methodFilter, mode, ownedIds, timeFilter, urgent, selected, customResolvedIds]);
 
   const clearAll = () => {
     setSelected([]);
@@ -631,7 +703,11 @@ export default function RecipePickerApp() {
 
   const generate = () => {
     setGenerated(true);
-    window.setTimeout(() => document.getElementById('ideas')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 40);
+    window.setTimeout(() => {
+      const results = document.getElementById('ideas');
+      results?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      results?.focus({ preventScroll: true });
+    }, 60);
   };
 
   const toggleWakeLock = async () => {
@@ -657,7 +733,12 @@ export default function RecipePickerApp() {
   };
 
   return (
-    <main className="app-shell min-h-[100dvh] overflow-x-hidden text-[#33291f]">
+    <main className="app-shell min-h-[100dvh] overflow-x-hidden pb-20 text-[#33291f]">
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#ded6c8] bg-[#fffaf1] p-3 shadow-lg lg:hidden">
+        <button type="button" onClick={generate} className="w-full rounded-xl bg-[#195d44] px-4 py-3 font-semibold text-white" data-testid="button-generate-mobile">
+          Find my next meal · {selectedLabels.length} ingredients
+        </button>
+      </div>
       <header className="mx-auto flex max-w-[1240px] items-center justify-between px-5 pb-8 pt-6 sm:px-8 lg:px-12">
         <div className="flex items-center gap-2.5"><span className="flex size-10 rotate-[-5deg] items-center justify-center rounded-[14px] bg-[#195d44] text-[#fbf8f1] shadow-[3px_4px_0_#d4b883]"><ChefHat size={21} strokeWidth={1.7} /></span><div><p className="font-serif text-[18px] font-semibold leading-none tracking-[-0.02em]">pinch &amp; pan</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#8c7c68]">a tiny recipe notebook</p></div></div>
         <div className="hidden items-center gap-2 text-[11px] font-medium text-[#847462] sm:flex"><span className="size-1.5 rounded-full bg-[#e06b3f]" /><span>English kitchen edition</span></div>
@@ -705,7 +786,7 @@ export default function RecipePickerApp() {
                 </button>
               </div>
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
-              <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => { setEntryMode('have'); toggleIngredient(id); }} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
+              <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => toggleIngredient(id)} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
             </div>
             <div className="mt-6 space-y-6">{filteredCategories.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc3b1] p-7 text-center text-[12px] text-[#877564]">No ingredient found yet. Try another name or add it in Custom below.</div>}{filteredCategories.map((category) => <div key={category.title}><div className="mb-3 flex items-baseline gap-2"><h3 className="font-serif text-[16px] font-semibold text-[#554636]">{category.title}</h3><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#a39380]">{category.eyebrow}</span></div><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{category.options.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} avoided={avoided.includes(option.id)} urgent={urgent.includes(option.id)} onToggle={() => toggleIngredient(option.id)} onUrgent={() => toggleUrgent(option.id)} />)}</div></div>)}</div>
           </div>
@@ -731,12 +812,17 @@ export default function RecipePickerApp() {
         </aside>
       </div>
 
-      <section id="ideas" className="border-t border-[#ded6c8] bg-[#f1eadf] px-5 py-12 sm:px-8 lg:px-12 lg:py-16">
+      <section id="ideas" tabIndex={-1} className="border-t border-[#ded6c8] bg-[#f1eadf] px-5 py-12 outline-none sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-[1240px]">
+          <div role="status" className="mb-6 rounded-2xl border border-[#195d44] bg-[#edf4e4] p-5 text-[#195d44]">
+            <p className="text-lg font-bold">{generated ? `${displayedRecipes.length} matching recipes found` : 'Choose ingredients, then find your meal'}</p>
+            <p className="mt-2 text-sm">{allRecipes.length} recipes available, including all 30 from your sheet. {generated && `Your ingredients: ${selectedLabels.join(', ') || customItems.join(', ') || 'none selected'}.`}</p>
+            <p className="mt-2 text-sm">Salt, oil, soy sauce and vinegar are assumed on hand. Other missing ingredients are listed on each card. Strict match requires every main ingredient.</p>
+          </div>
           <div className="mb-7 flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#e06b3f]">04 / the good part</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[.94] tracking-[-0.05em] text-[#33291f]">{generated ? 'Here are a few places to start.' : 'Your next meal is hiding in here.'}</h2><p className="mt-3 max-w-[560px] text-[13px] leading-6 text-[#796a59]">{generated ? `Sorted for ${mode === 'fuzzy' ? 'flexible ideas' : mode === 'strict' ? 'your exact basket' : 'the fastest comfort'}${clearFridge && urgent.length ? ' · with use-first items up front' : ''}.` : 'Pick what you have, set a few boundaries, and open any result for step-by-step kitchen mode.'}</p></div><div className="flex flex-wrap gap-2"><FilterButton active={timeFilter === 'all'} onClick={() => setTimeFilter('all')}>Any time</FilterButton><FilterButton active={timeFilter === 'quick'} onClick={() => setTimeFilter('quick')}>15–20 min</FilterButton><FilterButton active={timeFilter === 'slow'} onClick={() => setTimeFilter('slow')}>30+ min</FilterButton></div></div>
           <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-[#ded3c4] bg-[#f9f4eb] p-3 sm:flex-row sm:items-center sm:justify-between"><div className="flex flex-wrap items-center gap-2"><span className="flex items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><CookingPot size={13} /> method</span>{(['all', 'stir-fry', 'steam', 'boil', 'no-cook', 'air-fryer', 'oven'] as MethodFilter[]).map((value) => <FilterButton key={value} active={methodFilter === value} onClick={() => setMethodFilter(value)}>{value === 'all' ? 'All' : value.replace('-', ' ')}</FilterButton>)}</div><div className="flex items-center gap-2 overflow-x-auto"><span className="flex shrink-0 items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><Sparkles size={13} /> for</span>{(['all', 'beginner', 'high-protein', 'comfort'] as AudienceFilter[]).map((value) => <FilterButton key={value} active={audienceFilter === value} onClick={() => setAudienceFilter(value)}>{value === 'all' ? 'Everyone' : value.replace('-', ' ')}</FilterButton>)}</div></div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{displayedRecipes.map((recipe, index) => <RecipeCard key={recipe.id} recipe={recipe} index={index} match={getMatch(recipe)} onOpen={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} />)}</div>
-          {displayedRecipes.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-10 text-center"><ShieldAlert className="mx-auto text-[#b8664e]" /><p className="mt-3 font-serif text-[20px] font-semibold text-[#44372b]">No match with those boundaries yet.</p><p className="mt-2 text-[12px] text-[#877564]">Try removing a filter or switching to fuzzy match.</p></div>}
+          {generated && <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{displayedRecipes.map((recipe, index) => <RecipeCard key={recipe.id} recipe={recipe} index={index} match={getMatch(recipe)} onOpen={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} />)}</div>}
+          {generated && displayedRecipes.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-10 text-center"><ShieldAlert className="mx-auto text-[#b8664e]" /><p className="mt-3 font-serif text-[20px] font-semibold text-[#44372b]">No match with those boundaries yet.</p><p className="mt-2 text-[12px] text-[#877564]">Select at least one ingredient, remove a filter, or switch to fuzzy match to see recipes with missing ingredients.</p></div>}
           <div className="mt-9 flex items-center justify-center gap-2 text-center font-mono text-[10px] uppercase tracking-[0.13em] text-[#a08f7b]"><span className="h-px w-8 bg-[#d4c7b6]" /><span>keep tinkering</span><span className="h-px w-8 bg-[#d4c7b6]" /></div>
         </div>
       </section>

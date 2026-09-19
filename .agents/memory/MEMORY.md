@@ -1,0 +1,1 @@
+- [Recipe source boundaries](recipe-source.md) — uploaded recipe sheet supplies main ingredients, not full cooking instructions.
