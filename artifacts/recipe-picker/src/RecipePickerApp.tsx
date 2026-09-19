@@ -606,6 +606,7 @@ function RecipeDetail({ recipe, match, servings, onServings, wakeLockActive, onW
 export default function RecipePickerApp() {
   const [location, navigate] = useLocation();
   const isPicker = location === '/';
+  const isIngredients = location === '/ingredients';
   const isResults = location === '/results';
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -760,7 +761,7 @@ export default function RecipePickerApp() {
       </header>
 
       {!isPicker && <nav aria-label="Recipe navigation" className="mx-auto flex max-w-[1240px] flex-wrap gap-3 px-5 pb-6 sm:px-8 lg:px-12">
-        <button type="button" onClick={() => navigate('/')} className="rounded-xl border border-[#195d44] px-4 py-3 text-sm font-semibold text-[#195d44]">← Edit ingredients</button>
+        <button type="button" onClick={() => navigate(isIngredients ? '/' : '/ingredients')} className="rounded-xl border border-[#195d44] px-4 py-3 text-sm font-semibold text-[#195d44]">{isIngredients ? '← Done · Back to home' : '← Edit ingredients'}</button>
         {!isResults && <button type="button" onClick={generate} className="rounded-xl bg-[#195d44] px-4 py-3 text-sm font-semibold text-white">View meal results</button>}
       </nav>}
       {isPicker && <>
@@ -782,9 +783,21 @@ export default function RecipePickerApp() {
           </div>
         </div>
       </section>
-
+      </>}
+      {(isPicker || isIngredients) && <>
       <div className="mx-auto grid max-w-[1240px] gap-8 px-5 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:gap-12 lg:px-12">
-        <section id="ingredient-picker" tabIndex={-1} aria-label="Choose ingredients" className="space-y-9 outline-none">
+        {isPicker ? <section aria-labelledby="on-hand-title" className="self-start rounded-[22px] border border-[#d7e2cb] bg-[#edf4e4] p-5 sm:p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#52694e]">Your kitchen basket</p>
+          <h2 id="on-hand-title" className="mt-2 font-serif text-3xl font-semibold text-[#195d44]">Already on hand</h2>
+          <p className="mt-3 text-sm leading-6 text-[#52694e]">Basic seasonings are included automatically. Add your ingredients and tell us what to avoid on the selection page.</p>
+          <p className="mt-3 text-xs leading-5 text-[#52694e]">Seasonings: {[...defaultPantry].filter((id) => !avoided.includes(id)).map((id) => ingredientById.get(id)?.label).join(', ') || 'None — all marked Avoid'}</p>
+          <div className="mt-5 rounded-xl bg-white/60 p-4">
+            <p className="text-sm font-semibold text-[#195d44]">{selectedLabels.length} ingredients · {avoided.length} avoided</p>
+            <p className="mt-2 text-sm leading-6 text-[#52694e]">{selectedLabels.length ? `${selectedLabels.slice(0, 6).join(', ')}${selectedLabels.length > 6 ? ` + ${selectedLabels.length - 6} more` : ''}` : 'Your basket is ready for something fresh.'}</p>
+          </div>
+          <button type="button" onClick={() => navigate('/ingredients')} data-testid="button-choose-ingredients" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white hover:bg-[#124b36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#195d44]">{selectedLabels.length || avoided.length ? 'Edit ingredients' : 'Choose ingredients'} <ArrowUpRight size={17} /></button>
+        </section> : <section id="ingredient-picker" tabIndex={-1} aria-label="Choose ingredients" className="space-y-9 outline-none">
+          <h1 className="font-serif text-4xl font-semibold text-[#195d44]">Choose your ingredients</h1>
           <div>
             <SectionHeading number="01" eyebrow="Start with what is around" title="Build your kitchen basket"><span className="rounded-full bg-[#195d44] px-3 py-1.5 font-mono text-[10px] text-[#fbf8f1]">{selected.length} have · {avoided.length} avoid</span></SectionHeading>
             <div className="rounded-[22px] border border-[#ded6c8] bg-[#f9f4eb] p-4 sm:p-5">
@@ -839,7 +852,8 @@ export default function RecipePickerApp() {
           <div><SectionHeading number="02" eyebrow="How are we cooking?" title="Kitchen tools" /><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{toolOptions.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} onToggle={() => toggleIngredient(option.id)} />)}</div></div>
 
           <div><SectionHeading number="03" eyebrow="Anything else counts" title="Custom" /><div className="rounded-[22px] border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-4 sm:p-5"><div className="flex gap-2"><input value={customInput} onChange={(event) => setCustomInput(event.target.value)} onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); addCustom(); } }} placeholder="e.g. half a jar of pesto, leftover salmon" className="min-w-0 flex-1 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3 text-[13px] text-[#33291f] placeholder:text-[#a99b89]" data-testid="input-custom-ingredient" aria-label="Add a custom ingredient" /><button type="button" onClick={addCustom} className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#e06b3f] text-[#fffaf2] transition-transform hover:-translate-y-0.5" data-testid="button-add-custom" aria-label="Add custom ingredient"><Plus size={19} /></button></div>{customItems.length > 0 ? <div className="mt-3 flex flex-wrap gap-2">{customItems.map((item) => <span key={item} className="inline-flex items-center gap-1.5 rounded-full bg-[#e8efd7] px-3 py-1.5 text-[11px] font-medium text-[#195d44]">{item}<button type="button" onClick={() => removeCustom(item)} className="rounded-full text-[#588063] hover:text-[#195d44]" aria-label={`Remove ${item}`}><X size={13} /></button></span>)}</div> : <p className="mt-3 text-[11px] text-[#9b8c79]">Add a leftover, a craving, or an ingredient that is not in the list.</p>}</div></div>
-        </section>
+          <button type="button" onClick={() => navigate('/')} className="min-h-11 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white">Done · Back to home</button>
+        </section>}
 
         <aside className="lg:sticky lg:top-5 lg:self-start">
           <div className="rounded-[26px] border border-[#d8cebe] bg-[#efe7d9] p-4 shadow-[0_18px_40px_rgba(79,58,35,0.06)] sm:p-5">
@@ -888,7 +902,7 @@ export default function RecipePickerApp() {
               {mode !== 'fuzzy' && <button type="button" onClick={() => setMode('fuzzy')} className="rounded-xl bg-[#195d44] px-4 py-3 text-sm font-semibold text-white">Try fuzzy match</button>}
               {(timeFilter !== 'all' || methodFilter !== 'all' || audienceFilter !== 'all') && <button type="button" onClick={() => { setTimeFilter('all'); setMethodFilter('all'); setAudienceFilter('all'); }} className="rounded-xl border border-[#195d44] bg-white px-4 py-3 text-sm font-semibold text-[#195d44]">Clear recipe filters</button>}
               <button type="button" onClick={() => {
-                navigate('/');
+                navigate('/ingredients');
               }} className="rounded-xl border border-[#cdbfae] bg-white px-4 py-3 text-sm font-semibold text-[#5b4b3b]">Choose ingredients</button>
             </div>
           </div>}

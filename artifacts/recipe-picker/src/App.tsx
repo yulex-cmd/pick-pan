@@ -530,7 +530,7 @@ function Router() {
   return (
     <RoutedErrorBoundary>
       <Switch>
-        <Route path={/^\/(?:results|recipes)?$/} component={RecipePickerApp} />
+        <Route path={/^\/(?:ingredients|results|recipes)?$/} component={RecipePickerApp} />
         <Route component={NotFound} />
       </Switch>
     </RoutedErrorBoundary>
