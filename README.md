@@ -33,6 +33,8 @@ The UI is English-only.
 
 A recipe is a candidate when **at least one of your selected ingredients** appears in its required list. Basic seasonings alone are not a meal.
 
+Match percentage is **weighted**. Meat, poultry, and seafood count most, then staples (rice, noodles, pasta, potato, and similar). Vegetables, aromatics, and pantry seasonings count less. A dish that is missing its main protein or staple is ranked below dishes that still have those key items, even if most of the other ingredients match.
+
 | Goal | Keeps dishes tagged |
 | --- | --- |
 | No preference | All basket matches |

@@ -11,7 +11,9 @@ import {
   healthTagClass,
   ingredientById,
   ingredients,
+  isKeyMatchIngredient,
   quickPicks,
+  weightedMatchScore,
   type Ingredient,
   type Recipe,
   type RecipeAudience,
@@ -63,6 +65,7 @@ type MatchInfo = {
   status: 'complete' | 'partial' | 'stretch' | 'blocked';
   score: number;
   missing: string[];
+  missingKey: boolean;
   usedUrgent: boolean;
   substituteHints: string[];
 };
@@ -162,18 +165,16 @@ function RecipeCard({ recipe, index, match, onOpen, confirmed, onConfirm }: { re
     <article className="result-card flex h-full flex-col overflow-hidden rounded-[22px] border border-[#ded6c8] bg-[#fffdf8] shadow-[0_12px_28px_rgba(79,58,35,0.06)]" style={{ animationDelay: `${index * 70}ms` }} data-testid={`card-recipe-${recipe.id}`}>
       <div className="h-1.5 shrink-0" style={{ backgroundColor: recipe.accent }} />
       <div className="flex min-h-0 flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex min-w-0 gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#f4eddf] text-[#195d44]"><Icon size={21} strokeWidth={1.7} /></span>
-            <div className="min-w-0">
-              <div className="mb-1 flex flex-wrap items-center gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8b7965]">idea {String(index + 1).padStart(2, '0')}</span>
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${match.status === 'complete' ? 'bg-[#e8f0da] text-[#195d44]' : match.status === 'blocked' ? 'bg-[#f7dfd7] text-[#ad4b3c]' : 'bg-[#f7edda] text-[#92702a]'}`}>{statusLabel}</span>
-              </div>
-              <h3 className="line-clamp-2 min-h-[50px] font-serif text-[24px] font-semibold leading-[1.05] tracking-[-0.02em] text-[#33291f]">{recipe.title}</h3>
+        <div className="flex items-start gap-3">
+          <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#f4eddf] text-[#195d44]"><Icon size={21} strokeWidth={1.7} /></span>
+          <div className="min-w-0 flex-1">
+            <div className="mb-1 flex flex-wrap items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8b7965]">idea {String(index + 1).padStart(2, '0')}</span>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${match.status === 'complete' ? 'bg-[#e8f0da] text-[#195d44]' : match.status === 'blocked' ? 'bg-[#f7dfd7] text-[#ad4b3c]' : 'bg-[#f7edda] text-[#92702a]'}`}>{statusLabel}</span>
+              <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-[#f7f0e4] px-2.5 py-1 text-[11px] font-medium text-[#796b5a]"><Clock3 size={13} />{recipe.time} min</span>
             </div>
+            <h3 className="font-serif text-[22px] font-semibold leading-[1.2] tracking-[-0.02em] text-[#33291f] sm:text-[24px]">{recipe.title}</h3>
           </div>
-          <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-[#f7f0e4] px-2.5 py-1 text-[11px] font-medium text-[#796b5a]"><Clock3 size={13} />{recipe.time} min</span>
         </div>
         <p className="mt-4 line-clamp-2 min-h-12 text-[13px] leading-6 text-[#6f6253]">{recipe.description}</p>
         <div className="mt-4 grid gap-2 sm:grid-cols-2">
@@ -336,9 +337,11 @@ export default function RecipePickerApp() {
     const blocked = [...recipe.required, ...recipe.optional, ...recipe.ingredients.map((item) => item.id)].some((id) => avoided.includes(id));
     const missingIds = recipe.required.filter((id) => !ownedIds.has(id));
     const missing = missingIds.map((id) => ingredientById.get(id)?.label ?? id);
+    const missingKey = missingIds.some((id) => isKeyMatchIngredient(id));
     const substituteHints = recipe.substitutes.filter((item) => missing.some((label) => label.toLowerCase() === item.missing.toLowerCase())).map((item) => `${item.missing} → ${item.replacement}`);
-    const score = Math.round(((recipe.required.length - missingIds.length) / recipe.required.length) * 100);
-    return { status: blocked ? 'blocked' : missingIds.length === 0 ? 'complete' : missingIds.length <= 2 ? 'partial' : 'stretch', score, missing, usedUrgent: recipe.required.some((id) => urgent.includes(id)), substituteHints };
+    const score = weightedMatchScore(recipe.required, ownedIds);
+    const status = blocked ? 'blocked' : missingIds.length === 0 ? 'complete' : missingKey || missingIds.length > 2 ? 'stretch' : 'partial';
+    return { status, score, missing, missingKey, usedUrgent: recipe.required.some((id) => urgent.includes(id)), substituteHints };
   };
 
   const displayedRecipes = useMemo(() => {
@@ -364,6 +367,7 @@ export default function RecipePickerApp() {
         const aMatch = getMatch(a);
         const bMatch = getMatch(b);
         if (priority[aMatch.status] !== priority[bMatch.status]) return priority[aMatch.status] - priority[bMatch.status];
+        if (aMatch.missingKey !== bMatch.missingKey) return aMatch.missingKey ? 1 : -1;
         if (bMatch.score !== aMatch.score) return bMatch.score - aMatch.score;
          if (goalScore(b) !== goalScore(a)) return goalScore(b) - goalScore(a);
         if (clearFridge && aMatch.usedUrgent !== bMatch.usedUrgent) return aMatch.usedUrgent ? -1 : 1;
@@ -677,7 +681,7 @@ export default function RecipePickerApp() {
           <div className="mt-6 grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {savedRecipes.map((recipe) => <article key={recipe.id} data-testid={`saved-${recipe.id}`} className="flex h-full flex-col rounded-2xl border border-[#ded6c8] bg-[#fffdf8] p-5">
               <p className="mb-2 text-xs font-semibold text-[#195d44]"><Check size={14} className="mr-1 inline" />Confirmed</p>
-              <h3 className="line-clamp-2 min-h-[56px] font-serif text-xl font-semibold leading-7">{recipe.title}</h3>
+              <h3 className="font-serif text-xl font-semibold leading-7">{recipe.title}</h3>
               <p className="mt-2 line-clamp-2 min-h-10 flex-1 text-sm text-[#766856]">~{recipe.calories} kcal / serving · {recipe.required.map((id) => ingredientById.get(id)?.label ?? id).join(', ')}</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <button type="button" onClick={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} className="rounded-xl bg-[#195d44] px-4 py-2 text-sm font-semibold text-white">View recipe</button>

@@ -168,6 +168,32 @@ export const ingredientById = new Map(ingredients.map((item) => [item.id, item])
 export const defaultPantry = new Set(['salt', 'oil', 'soy-sauce', 'vinegar']);
 export const quickPicks = ['eggs', 'tomato', 'potato', 'garlic', 'pork'];
 
+const KEY_PROTEIN_CATEGORIES = new Set(['Meat & poultry', 'Fish & seafood']);
+const KEY_STAPLE_CATEGORY = 'Staples';
+
+export function isKeyMatchIngredient(id: string) {
+  const item = ingredientById.get(id);
+  if (!item) return false;
+  return KEY_PROTEIN_CATEGORIES.has(item.category) || item.category === KEY_STAPLE_CATEGORY;
+}
+
+export function ingredientMatchWeight(id: string) {
+  const item = ingredientById.get(id);
+  if (!item) return 1;
+  if (KEY_PROTEIN_CATEGORIES.has(item.category)) return 4;
+  if (item.category === KEY_STAPLE_CATEGORY) return 3;
+  if (defaultPantry.has(id)) return 0.5;
+  return 1;
+}
+
+export function weightedMatchScore(required: string[], owned: Iterable<string>) {
+  const ownedSet = owned instanceof Set ? owned : new Set(owned);
+  const total = required.reduce((sum, id) => sum + ingredientMatchWeight(id), 0);
+  if (total <= 0) return 0;
+  const earned = required.reduce((sum, id) => sum + (ownedSet.has(id) ? ingredientMatchWeight(id) : 0), 0);
+  return Math.round((earned / total) * 100);
+}
+
 const groupAccents: Record<string, string> = {
   Beef: '#c87952',
   Pork: '#b8753b',
