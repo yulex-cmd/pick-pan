@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useRecipeBook } from './useRecipeBook';
 import KitchenTip from './components/KitchenTip';
 import HealthyVegetableIllustration from './components/HealthyVegetableIllustration';
+import DishIllustration from './components/DishIllustration';
 import { useLocation } from 'wouter';
 import {
   Apple,
@@ -786,17 +787,38 @@ export default function RecipePickerApp() {
       </>}
       {(isPicker || isIngredients) && <>
       <div className="mx-auto grid max-w-[1240px] gap-8 px-5 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:gap-12 lg:px-12">
-        {isPicker ? <section aria-labelledby="on-hand-title" className="self-start rounded-[22px] border border-[#d7e2cb] bg-[#edf4e4] p-5 sm:p-7">
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#52694e]">Your kitchen basket</p>
-          <h2 id="on-hand-title" className="mt-2 font-serif text-3xl font-semibold text-[#195d44]">Already on hand</h2>
-          <p className="mt-3 text-sm leading-6 text-[#52694e]">Basic seasonings are included automatically. Add your ingredients and tell us what to avoid on the selection page.</p>
-          <p className="mt-3 text-xs leading-5 text-[#52694e]">Seasonings: {[...defaultPantry].filter((id) => !avoided.includes(id)).map((id) => ingredientById.get(id)?.label).join(', ') || 'None — all marked Avoid'}</p>
-          <div className="mt-5 rounded-xl bg-white/60 p-4">
-            <p className="text-sm font-semibold text-[#195d44]">{selectedLabels.length} ingredients · {avoided.length} avoided</p>
-            <p className="mt-2 text-sm leading-6 text-[#52694e]">{selectedLabels.length ? `${selectedLabels.slice(0, 6).join(', ')}${selectedLabels.length > 6 ? ` + ${selectedLabels.length - 6} more` : ''}` : 'Your basket is ready for something fresh.'}</p>
+        {isPicker ? <div className="flex flex-col gap-6 self-start">
+          <section aria-labelledby="on-hand-title" className="rounded-[22px] border border-[#d7e2cb] bg-[#edf4e4] p-5 sm:p-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#52694e]">Your kitchen basket</p>
+            <h2 id="on-hand-title" className="mt-2 font-serif text-3xl font-semibold text-[#195d44]">Already on hand</h2>
+            <p className="mt-3 text-sm leading-6 text-[#52694e]">Basic seasonings are included automatically. Add your ingredients and tell us what to avoid on the selection page.</p>
+            <p className="mt-3 text-xs leading-5 text-[#52694e]">Seasonings: {[...defaultPantry].filter((id) => !avoided.includes(id)).map((id) => ingredientById.get(id)?.label).join(', ') || 'None — all marked Avoid'}</p>
+            <div className="mt-5 rounded-xl bg-white/60 p-4">
+              <p className="text-sm font-semibold text-[#195d44]">{selectedLabels.length} ingredients · {avoided.length} avoided</p>
+              <p className="mt-2 text-sm leading-6 text-[#52694e]">{selectedLabels.length ? `${selectedLabels.slice(0, 6).join(', ')}${selectedLabels.length > 6 ? ` + ${selectedLabels.length - 6} more` : ''}` : 'Your basket is ready for something fresh.'}</p>
+            </div>
+            <button type="button" onClick={() => navigate('/ingredients')} data-testid="button-choose-ingredients" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white hover:bg-[#124b36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#195d44]">{selectedLabels.length || avoided.length ? 'Edit ingredients' : 'Choose ingredients'} <ArrowUpRight size={17} /></button>
+          </section>
+          
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-5">
+            <div className="rounded-[22px] border border-[#e8dfce] bg-[#fffaf1] px-2 pb-4 pt-2 sm:px-5 sm:pb-6 text-center flex flex-col items-center">
+              <div className="w-full max-w-[220px] -mb-4">
+                <DishIllustration dish="tomato-egg-rice" />
+              </div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#a39380] mb-1">Inspiration</p>
+              <h3 className="font-serif text-[17px] font-semibold text-[#42372b]">Tomato egg rice</h3>
+              <p className="mt-1 text-[12px] text-[#8a7966]">A comforting classic to aim for.</p>
+            </div>
+            <div className="rounded-[22px] border border-[#e8dfce] bg-[#fffaf1] px-2 pb-4 pt-2 sm:px-5 sm:pb-6 text-center flex flex-col items-center">
+              <div className="w-full max-w-[220px] -mb-4">
+                <DishIllustration dish="vegetable-bowl" />
+              </div>
+              <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#a39380] mb-1">Inspiration</p>
+              <h3 className="font-serif text-[17px] font-semibold text-[#42372b]">Crisp veggie bowl</h3>
+              <p className="mt-1 text-[12px] text-[#8a7966]">Fresh &amp; colorful assembly.</p>
+            </div>
           </div>
-          <button type="button" onClick={() => navigate('/ingredients')} data-testid="button-choose-ingredients" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white hover:bg-[#124b36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#195d44]">{selectedLabels.length || avoided.length ? 'Edit ingredients' : 'Choose ingredients'} <ArrowUpRight size={17} /></button>
-        </section> : <section id="ingredient-picker" tabIndex={-1} aria-label="Choose ingredients" className="space-y-9 outline-none">
+        </div> : <section id="ingredient-picker" tabIndex={-1} aria-label="Choose ingredients" className="space-y-9 outline-none">
           <h1 className="font-serif text-4xl font-semibold text-[#195d44]">Choose your ingredients</h1>
           <div>
             <SectionHeading number="01" eyebrow="Start with what is around" title="Build your kitchen basket"><span className="rounded-full bg-[#195d44] px-3 py-1.5 font-mono text-[10px] text-[#fbf8f1]">{selected.length} have · {avoided.length} avoid</span></SectionHeading>
@@ -846,7 +868,11 @@ export default function RecipePickerApp() {
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
               <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => toggleIngredient(id)} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
             </div>
-            <div className="mt-6 space-y-6">{filteredCategories.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc3b1] p-7 text-center text-[12px] text-[#877564]">No ingredient found yet. Try another name or add it in Custom below.</div>}{filteredCategories.map((category) => <div key={category.title}><div className="mb-3 flex items-baseline gap-2"><h3 className="font-serif text-[19px] font-semibold text-[#44372b]">{category.title}</h3><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#a39380]">{category.eyebrow}</span></div><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{category.options.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} avoided={avoided.includes(option.id)} urgent={urgent.includes(option.id)} onToggle={() => toggleIngredient(option.id)} onUrgent={() => toggleUrgent(option.id)} />)}</div></div>)}</div>
+            <div className="mt-6 space-y-6">{filteredCategories.length === 0 && <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center">
+              <DishIllustration dish="tomato-egg-rice" className="w-full max-w-[160px] mb-4 opacity-75 grayscale-[0.2]" />
+              <p className="font-serif text-lg font-semibold text-[#44372b]">No ingredient found yet.</p>
+              <p className="mt-1 text-[13px] text-[#877564]">Try another name or add it in Custom below.</p>
+            </div>}{filteredCategories.map((category) => <div key={category.title}><div className="mb-3 flex items-baseline gap-2"><h3 className="font-serif text-[19px] font-semibold text-[#44372b]">{category.title}</h3><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#a39380]">{category.eyebrow}</span></div><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{category.options.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} avoided={avoided.includes(option.id)} urgent={urgent.includes(option.id)} onToggle={() => toggleIngredient(option.id)} onUrgent={() => toggleUrgent(option.id)} />)}</div></div>)}</div>
           </div>
 
           <div><SectionHeading number="02" eyebrow="How are we cooking?" title="Kitchen tools" /><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{toolOptions.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} onToggle={() => toggleIngredient(option.id)} />)}</div></div>
@@ -887,9 +913,9 @@ export default function RecipePickerApp() {
             {storageError && <p role="alert" className="text-sm text-red-700">{storageError}</p>}
           </div>
           {generated && <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{displayedRecipes.map((recipe, index) => <RecipeCard key={recipe.id} recipe={recipe} index={index} match={getMatch(recipe)} confirmed={savedIds.includes(recipe.id)} onConfirm={() => { if (confirm(recipe.id)) setBookNotice(`${recipe.title} added to My recipe book.`); }} onOpen={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} />)}</div>}
-          {generated && displayedRecipes.length === 0 && <div role="status" className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-6 text-center sm:p-10">
-            <Soup className="mx-auto text-[#b8664e]" size={32} />
-            <h3 className="mt-3 font-serif text-2xl font-semibold text-[#44372b]">No recipe yet — let’s try another way.</h3>
+          {generated && displayedRecipes.length === 0 && <div role="status" className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-6 text-center sm:p-10 flex flex-col items-center">
+            <DishIllustration dish="stir-fry" className="w-full max-w-[220px] -mt-4 -mb-2 opacity-90" />
+            <h3 className="mt-4 font-serif text-2xl font-semibold text-[#44372b]">No recipe yet — let’s try another way.</h3>
             <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#756654]">
               {selectedLabels.length === 0 && customResolvedIds.length === 0
                 ? 'Start with a main ingredient such as eggs, tomatoes or chicken. Basic seasonings alone do not count as a meal. Custom entries must match a listed ingredient name.'
@@ -914,7 +940,11 @@ export default function RecipePickerApp() {
         <h2 id="recipe-book-title" className="font-serif text-3xl font-semibold text-[#195d44]">My recipe book ({savedRecipes.length})</h2>
         <p className="mt-3 text-sm text-[#766856]">All your confirmed dishes, saved in this browser. Changing ingredients or clearing your basket will not remove them.</p>
         {storageError && <p role="alert" className="mt-3 text-sm text-red-700">{storageError}</p>}
-        {savedRecipes.length === 0 ? <p className="mt-6 rounded-2xl border border-dashed border-[#cfc3b1] p-6 text-[#766856]">Your recipe book is empty. Choose “Confirm choice” on a result card to add a dish.</p> :
+        {savedRecipes.length === 0 ? <div className="mt-6 flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center">
+          <DishIllustration dish="vegetable-bowl" className="w-full max-w-[200px] -mt-2 mb-4 opacity-80" />
+          <p className="font-serif text-xl font-semibold text-[#44372b]">Your recipe book is empty.</p>
+          <p className="mt-2 text-[14px] text-[#766856]">Choose “Confirm choice” on a result card to add a dish.</p>
+        </div> :
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {savedRecipes.map((recipe) => <article key={recipe.id} data-testid={`saved-${recipe.id}`} className="rounded-2xl border border-[#ded6c8] bg-[#fffdf8] p-5">
               <p className="mb-2 text-xs font-semibold text-[#195d44]"><Check size={14} className="mr-1 inline" />Confirmed</p>
