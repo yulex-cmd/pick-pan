@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { useRecipeBook } from './useRecipeBook';
 import {
   Apple,
   ArrowUpRight,
@@ -106,7 +107,7 @@ const categories: { title: string; eyebrow: string; ids: string[] }[] = [
   { title: 'Beans & tofu', eyebrow: 'plant-forward · 5+', ids: ['peas', 'tofu', 'chickpeas', 'lentils', 'black-beans', 'beans'] },
   { title: 'Eggs & dairy', eyebrow: 'fridge friends · 3', ids: ['eggs', 'yogurt', 'cheese'] },
   { title: 'Staples', eyebrow: 'pantry shelf · 3+', ids: ['pasta', 'tortilla', 'rice', 'noodles', 'bread'] },
-  { title: 'Seasonings & herbs', eyebrow: 'small but mighty · 4+', ids: ['chili-bean-paste', 'soy-sauce', 'vinegar', 'basil', 'oil', 'salt', 'spices'] },
+  { title: 'Extra seasonings & herbs', eyebrow: 'optional pantry picks · 3', ids: ['chili-bean-paste', 'basil', 'spices'] },
   { title: 'Other cooking ingredients', eyebrow: 'special extras · 1', ids: ['coconut-milk'] },
 ];
 
@@ -511,7 +512,7 @@ function FilterButton({ active, children, onClick }: { active: boolean; children
   return <button type="button" onClick={onClick} className={`rounded-full border px-3 py-2 text-[11px] font-semibold transition-colors ${active ? 'border-[#195d44] bg-[#195d44] text-[#fbf8f1]' : 'border-[#ded3c4] bg-[#fbf8f1] text-[#746452] hover:border-[#a99b88]'}`}>{children}</button>;
 }
 
-function RecipeCard({ recipe, index, match, onOpen }: { recipe: Recipe; index: number; match: MatchInfo; onOpen: () => void }) {
+function RecipeCard({ recipe, index, match, onOpen, confirmed, onConfirm }: { recipe: Recipe; index: number; match: MatchInfo; onOpen: () => void; confirmed: boolean; onConfirm: () => void }) {
   const Icon = recipe.icon;
   const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${recipe.title} easy recipe`)}`;
   const statusLabel = match.status === 'complete' ? '100% match' : match.status === 'partial' ? `${match.score}% match · ${match.missing.length} to pick up` : match.status === 'blocked' ? 'Not for you today' : `${match.score}% match`;
@@ -540,6 +541,9 @@ function RecipeCard({ recipe, index, match, onOpen }: { recipe: Recipe; index: n
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#eee6d9] pt-4">
           <div className="flex flex-wrap gap-1.5">{recipe.tags.map((tag) => <span key={tag} className="rounded-full border border-[#e4dacb] px-2.5 py-1 text-[10px] font-medium text-[#887967]">{tag}</span>)}</div>
           <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={onConfirm} disabled={confirmed} aria-pressed={confirmed} data-testid={`confirm-${recipe.id}`} className="inline-flex items-center gap-1.5 rounded-full bg-[#e06b3f] px-3.5 py-2 text-[12px] font-semibold text-white disabled:bg-[#e8f0da] disabled:text-[#195d44]">
+              <Check size={14} />{confirmed ? 'Confirmed' : 'Confirm choice'}
+            </button>
             <button type="button" onClick={onOpen} className="inline-flex items-center gap-1.5 rounded-full border border-[#cdbfae] px-3.5 py-2 text-[12px] font-semibold text-[#5b4b3b] transition-colors hover:border-[#195d44] hover:text-[#195d44]">Cook this <ChevronDown size={14} /></button>
             <a href={youtubeUrl} target="_blank" rel="noreferrer" className="group inline-flex items-center gap-1.5 rounded-full bg-[#195d44] px-3.5 py-2 text-[12px] font-semibold text-[#fbf8f1] transition-transform hover:-translate-y-0.5" data-testid={`link-youtube-${recipe.id}`}>YouTube <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></a>
           </div>
@@ -597,6 +601,17 @@ function RecipeDetail({ recipe, match, servings, onServings, wakeLockActive, onW
 }
 
 export default function RecipePickerApp() {
+  const { savedIds, storageError, confirm, remove } = useRecipeBook();
+  const [bookNotice, setBookNotice] = useState('');
+  const savedRecipes = savedIds.flatMap((id) => {
+    const recipe = allRecipes.find((item) => item.id === id);
+    return recipe ? [recipe] : [];
+  });
+  const openBook = () => {
+    const book = document.getElementById('my-recipe-book');
+    book?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    book?.focus({ preventScroll: true });
+  };
   const [mode, setMode] = useState<Mode>('fuzzy');
   const [entryMode, setEntryMode] = useState<EntryMode>('have');
   const [selected, setSelected] = useState<string[]>([]);
@@ -623,7 +638,7 @@ export default function RecipePickerApp() {
     const query = item.trim().toLowerCase();
     return ingredients.filter((ingredient) => [ingredient.label, ...ingredient.aliases].some((alias) => query === alias.toLowerCase())).map((ingredient) => ingredient.id);
   }), [customItems]);
-  const ownedIds = useMemo(() => new Set([...selected, ...customResolvedIds, ...defaultPantry]), [customResolvedIds, selected]);
+  const ownedIds = useMemo(() => new Set([...selected, ...customResolvedIds, ...defaultPantry].filter((id) => !avoided.includes(id))), [customResolvedIds, selected, avoided]);
 
   useEffect(() => {
     if (timerSeconds <= 0) return undefined;
@@ -741,7 +756,9 @@ export default function RecipePickerApp() {
       </div>
       <header className="mx-auto flex max-w-[1240px] items-center justify-between px-5 pb-8 pt-6 sm:px-8 lg:px-12">
         <div className="flex items-center gap-2.5"><span className="flex size-10 rotate-[-5deg] items-center justify-center rounded-[14px] bg-[#195d44] text-[#fbf8f1] shadow-[3px_4px_0_#d4b883]"><ChefHat size={21} strokeWidth={1.7} /></span><div><p className="font-serif text-[18px] font-semibold leading-none tracking-[-0.02em]">pinch &amp; pan</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#8c7c68]">a tiny recipe notebook</p></div></div>
-        <div className="hidden items-center gap-2 text-[11px] font-medium text-[#847462] sm:flex"><span className="size-1.5 rounded-full bg-[#e06b3f]" /><span>English kitchen edition</span></div>
+        <button type="button" onClick={openBook} className="flex shrink-0 items-center gap-2 rounded-xl border border-[#195d44] px-3 py-2 text-xs font-semibold text-[#195d44]" aria-label={`Open my recipe book, ${savedRecipes.length} dishes`}>
+          <NotebookPen size={16} /><span>My recipes ({savedRecipes.length})</span>
+        </button>
       </header>
 
       <section className="mx-auto max-w-[1240px] px-5 pb-10 sm:px-8 lg:px-12 lg:pb-14">
@@ -752,7 +769,7 @@ export default function RecipePickerApp() {
       </section>
 
       <div className="mx-auto grid max-w-[1240px] gap-8 px-5 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:gap-12 lg:px-12">
-        <section aria-label="Choose ingredients" className="space-y-9">
+        <section id="ingredient-picker" tabIndex={-1} aria-label="Choose ingredients" className="space-y-9 outline-none">
           <div>
             <SectionHeading number="01" eyebrow="Start with what is around" title="Build your kitchen basket"><span className="rounded-full bg-[#195d44] px-3 py-1.5 font-mono text-[10px] text-[#fbf8f1]">{selected.length} have · {avoided.length} avoid</span></SectionHeading>
             <div className="rounded-[22px] border border-[#ded6c8] bg-[#f9f4eb] p-4 sm:p-5">
@@ -784,6 +801,20 @@ export default function RecipePickerApp() {
                   <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${entryMode === 'avoid' ? 'bg-[#b24f3e] text-[#fffaf1]' : 'bg-[#f8e8e1] text-[#b45a49]'}`}><ShieldAlert size={18} /></span>
                   <span className="min-w-0"><span className="block text-[14px] font-bold">I avoid</span><span className="mt-1 block text-[10px] leading-4 opacity-75">Exclude allergies or dislikes</span></span>
                 </button>
+              </div>
+              <div className="mt-5 rounded-2xl border border-[#d7e2cb] bg-[#edf4e4] p-4" aria-label="Basic seasonings">
+                <h3 className="font-serif text-lg font-semibold text-[#195d44]">Basic seasonings · already on hand</h3>
+                <p className="mt-1 text-xs leading-5 text-[#52694e]">Salt, oil, soy sauce and vinegar count automatically — no need to select them. Choose your main ingredients below.</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {[...defaultPantry].map((id) => <button key={id} type="button" aria-pressed={!avoided.includes(id)} onClick={() => {
+                    setAvoided((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+                    setGenerated(false);
+                  }} className={`flex min-h-11 items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold ${avoided.includes(id) ? 'border-[#c45a48] bg-[#fff0eb] text-[#a34d3c]' : 'border-[#a6ba94] bg-white text-[#195d44]'}`}>
+                    {avoided.includes(id) ? <ShieldAlert size={15} /> : <Check size={15} />}
+                    {ingredientById.get(id)?.label} · {avoided.includes(id) ? 'Avoid' : 'On hand'}
+                  </button>)}
+                </div>
+                <p className="mt-2 text-xs leading-5 text-[#52694e]">Tap a seasoning to mark it “Avoid” if you cannot use it. Recipes containing it will be excluded. Tap again to restore it.</p>
               </div>
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
               <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => toggleIngredient(id)} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
@@ -817,16 +848,58 @@ export default function RecipePickerApp() {
           <div role="status" className="mb-6 rounded-2xl border border-[#195d44] bg-[#edf4e4] p-5 text-[#195d44]">
             <p className="text-lg font-bold">{generated ? `${displayedRecipes.length} matching recipes found` : 'Choose ingredients, then find your meal'}</p>
             <p className="mt-2 text-sm">{allRecipes.length} recipes available, including all 30 from your sheet. {generated && `Your ingredients: ${selectedLabels.join(', ') || customItems.join(', ') || 'none selected'}.`}</p>
-            <p className="mt-2 text-sm">Salt, oil, soy sauce and vinegar are assumed on hand. Other missing ingredients are listed on each card. Strict match requires every main ingredient.</p>
+            <p className="mt-2 text-sm">Basic seasonings count automatically unless marked “Avoid”. Other missing ingredients are listed on each card. Strict match requires every main ingredient.</p>
           </div>
           <div className="mb-7 flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#e06b3f]">04 / the good part</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[.94] tracking-[-0.05em] text-[#33291f]">{generated ? 'Here are a few places to start.' : 'Your next meal is hiding in here.'}</h2><p className="mt-3 max-w-[560px] text-[13px] leading-6 text-[#796a59]">{generated ? `Sorted for ${mode === 'fuzzy' ? 'flexible ideas' : mode === 'strict' ? 'your exact basket' : 'the fastest comfort'}${clearFridge && urgent.length ? ' · with use-first items up front' : ''}.` : 'Pick what you have, set a few boundaries, and open any result for step-by-step kitchen mode.'}</p></div><div className="flex flex-wrap gap-2"><FilterButton active={timeFilter === 'all'} onClick={() => setTimeFilter('all')}>Any time</FilterButton><FilterButton active={timeFilter === 'quick'} onClick={() => setTimeFilter('quick')}>15–20 min</FilterButton><FilterButton active={timeFilter === 'slow'} onClick={() => setTimeFilter('slow')}>30+ min</FilterButton></div></div>
           <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-[#ded3c4] bg-[#f9f4eb] p-3 sm:flex-row sm:items-center sm:justify-between"><div className="flex flex-wrap items-center gap-2"><span className="flex items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><CookingPot size={13} /> method</span>{(['all', 'stir-fry', 'steam', 'boil', 'no-cook', 'air-fryer', 'oven'] as MethodFilter[]).map((value) => <FilterButton key={value} active={methodFilter === value} onClick={() => setMethodFilter(value)}>{value === 'all' ? 'All' : value.replace('-', ' ')}</FilterButton>)}</div><div className="flex items-center gap-2 overflow-x-auto"><span className="flex shrink-0 items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><Sparkles size={13} /> for</span>{(['all', 'beginner', 'high-protein', 'comfort'] as AudienceFilter[]).map((value) => <FilterButton key={value} active={audienceFilter === value} onClick={() => setAudienceFilter(value)}>{value === 'all' ? 'Everyone' : value.replace('-', ' ')}</FilterButton>)}</div></div>
-          {generated && <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{displayedRecipes.map((recipe, index) => <RecipeCard key={recipe.id} recipe={recipe} index={index} match={getMatch(recipe)} onOpen={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} />)}</div>}
-          {generated && displayedRecipes.length === 0 && <div className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-10 text-center"><ShieldAlert className="mx-auto text-[#b8664e]" /><p className="mt-3 font-serif text-[20px] font-semibold text-[#44372b]">No match with those boundaries yet.</p><p className="mt-2 text-[12px] text-[#877564]">Select at least one ingredient, remove a filter, or switch to fuzzy match to see recipes with missing ingredients.</p></div>}
+          <div className="mb-5 flex flex-wrap items-center gap-3">
+            <button type="button" onClick={openBook} className="rounded-xl bg-[#195d44] px-4 py-3 font-semibold text-white">My recipe book ({savedRecipes.length})</button>
+            <p role="status" className="text-sm text-[#195d44]">{bookNotice}</p>
+            {storageError && <p role="alert" className="text-sm text-red-700">{storageError}</p>}
+          </div>
+          {generated && <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">{displayedRecipes.map((recipe, index) => <RecipeCard key={recipe.id} recipe={recipe} index={index} match={getMatch(recipe)} confirmed={savedIds.includes(recipe.id)} onConfirm={() => { if (confirm(recipe.id)) setBookNotice(`${recipe.title} added to My recipe book.`); }} onOpen={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} />)}</div>}
+          {generated && displayedRecipes.length === 0 && <div role="status" className="rounded-2xl border border-dashed border-[#cfc3b1] bg-[#f9f4eb] p-6 text-center sm:p-10">
+            <Soup className="mx-auto text-[#b8664e]" size={32} />
+            <h3 className="mt-3 font-serif text-2xl font-semibold text-[#44372b]">No recipe yet — let’s try another way.</h3>
+            <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-[#756654]">
+              {selectedLabels.length === 0 && customResolvedIds.length === 0
+                ? 'Start with a main ingredient such as eggs, tomatoes or chicken. Basic seasonings alone do not count as a meal. Custom entries must match a listed ingredient name.'
+                : mode === 'strict'
+                  ? 'No dish has all its main ingredients available with your current filters. Try fuzzy match to see what you can make with one or two additions.'
+                  : 'No dish in our current recipe collection fits these ingredients and filters. Try clearing filters, or choose a common ingredient such as eggs, tomatoes or chicken.'}
+            </p>
+            {avoided.length > 0 && <p className="mt-3 text-xs text-[#a34d3c]">Your {avoided.length} avoided ingredients stay excluded when you relax matching or clear filters.</p>}
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              {mode !== 'fuzzy' && <button type="button" onClick={() => setMode('fuzzy')} className="rounded-xl bg-[#195d44] px-4 py-3 text-sm font-semibold text-white">Try fuzzy match</button>}
+              {(timeFilter !== 'all' || methodFilter !== 'all' || audienceFilter !== 'all') && <button type="button" onClick={() => { setTimeFilter('all'); setMethodFilter('all'); setAudienceFilter('all'); }} className="rounded-xl border border-[#195d44] bg-white px-4 py-3 text-sm font-semibold text-[#195d44]">Clear recipe filters</button>}
+              <button type="button" onClick={() => {
+                const picker = document.getElementById('ingredient-picker');
+                picker?.scrollIntoView({ behavior: 'instant', block: 'start' });
+                picker?.focus({ preventScroll: true });
+              }} className="rounded-xl border border-[#cdbfae] bg-white px-4 py-3 text-sm font-semibold text-[#5b4b3b]">Choose ingredients</button>
+            </div>
+          </div>}
           <div className="mt-9 flex items-center justify-center gap-2 text-center font-mono text-[10px] uppercase tracking-[0.13em] text-[#a08f7b]"><span className="h-px w-8 bg-[#d4c7b6]" /><span>keep tinkering</span><span className="h-px w-8 bg-[#d4c7b6]" /></div>
         </div>
       </section>
 
+      <section id="my-recipe-book" tabIndex={-1} aria-labelledby="recipe-book-title" className="mx-auto max-w-[1240px] px-5 py-12 outline-none sm:px-8 lg:px-12">
+        <h2 id="recipe-book-title" className="font-serif text-3xl font-semibold text-[#195d44]">My recipe book ({savedRecipes.length})</h2>
+        <p className="mt-3 text-sm text-[#766856]">All your confirmed dishes, saved in this browser. Changing ingredients or clearing your basket will not remove them.</p>
+        {storageError && <p role="alert" className="mt-3 text-sm text-red-700">{storageError}</p>}
+        {savedRecipes.length === 0 ? <p className="mt-6 rounded-2xl border border-dashed border-[#cfc3b1] p-6 text-[#766856]">Your recipe book is empty. Choose “Confirm choice” on a result card to add a dish.</p> :
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {savedRecipes.map((recipe) => <article key={recipe.id} data-testid={`saved-${recipe.id}`} className="rounded-2xl border border-[#ded6c8] bg-[#fffdf8] p-5">
+              <p className="mb-2 text-xs font-semibold text-[#195d44]"><Check size={14} className="mr-1 inline" />Confirmed</p>
+              <h3 className="font-serif text-xl font-semibold">{recipe.title}</h3>
+              <p className="mt-2 text-sm text-[#766856]">{recipe.required.map((id) => ingredientById.get(id)?.label ?? id).join(', ')}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button type="button" onClick={() => { setSelectedRecipe(recipe); setServings(recipe.baseServings); }} className="rounded-xl bg-[#195d44] px-4 py-2 text-sm font-semibold text-white">View recipe</button>
+                <button type="button" aria-label={`Remove ${recipe.title} from recipe book`} onClick={() => { if (remove(recipe.id)) setBookNotice(`${recipe.title} removed from My recipe book.`); }} className="rounded-xl border border-[#cdbfae] px-4 py-2 text-sm text-[#a34d3c]">Remove</button>
+              </div>
+            </article>)}
+          </div>}
+      </section>
       <footer className="mx-auto flex max-w-[1240px] flex-col gap-3 px-5 py-8 text-[11px] text-[#8d7b67] sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><p className="font-serif text-[16px] font-semibold text-[#195d44]">pinch &amp; pan</p><p>Made for the “what do I have?” moment.</p></footer>
       {selectedRecipe && <RecipeDetail recipe={selectedRecipe} match={getMatch(selectedRecipe)} servings={servings} onServings={setServings} wakeLockActive={wakeLockActive} onWakeLock={toggleWakeLock} timerSeconds={timerSeconds} timerLabel={timerLabel} onStartTimer={startTimer} onClose={() => setSelectedRecipe(null)} />}
     </main>
