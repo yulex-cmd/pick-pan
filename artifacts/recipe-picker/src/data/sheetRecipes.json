@@ -1,0 +1,2423 @@
+[
+  {
+    "id": "beef-and-broccoli-stir-fry",
+    "title": "Beef and Broccoli Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "broccoli",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 420,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉（beef）、西兰花（broccoli）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "beef-and-bell-pepper-stir-fry",
+    "title": "Beef and Bell Pepper Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "bell-pepper",
+      "onion",
+      "soy-sauce"
+    ],
+    "calories": 430,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉（beef）、彩椒（bell pepper）、洋葱（onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "spaghetti-bolognese",
+    "title": "Spaghetti Bolognese",
+    "cuisine": "Italian",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "pasta",
+      "tomato",
+      "onion",
+      "garlic"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、意大利面（pasta）、番茄（tomato）、洋葱（onion）、大蒜（garlic）"
+  },
+  {
+    "id": "beef-tacos",
+    "title": "Beef Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "tortilla",
+      "tomato",
+      "lettuce",
+      "cheddar",
+      "sour-cream"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、墨西哥薄饼（tortilla）、番茄（tomato）、生菜（lettuce）、切达奶酪（cheddar）、酸奶油（sour cream）"
+  },
+  {
+    "id": "beef-keema-rice",
+    "title": "Beef Keema Rice",
+    "cuisine": "South Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "rice",
+      "peas",
+      "onion",
+      "tomato",
+      "ginger"
+    ],
+    "calories": 640,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、米饭/大米（rice）、豌豆（peas）、洋葱（onion）、番茄（tomato）、生姜（ginger）"
+  },
+  {
+    "id": "beef-mushroom-rice-bowl",
+    "title": "Beef Mushroom Rice Bowl",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "mushroom",
+      "rice",
+      "onion",
+      "soy-sauce"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉（beef）、蘑菇（mushroom）、米饭/大米（rice）、洋葱（onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "beef-and-cabbage-stir-fry",
+    "title": "Beef and Cabbage Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "cabbage",
+      "carrot",
+      "garlic"
+    ],
+    "calories": 410,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉（beef）、卷心菜（cabbage）、胡萝卜（carrot）、大蒜（garlic）"
+  },
+  {
+    "id": "beef-stuffed-bell-peppers",
+    "title": "Beef Stuffed Bell Peppers",
+    "cuisine": "European / American",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "bell-pepper",
+      "rice",
+      "tomato",
+      "cheese"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "oven",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、彩椒（bell pepper）、米饭/大米（rice）、番茄（tomato）、奶酪（cheese）"
+  },
+  {
+    "id": "beef-and-green-bean-stir-fry",
+    "title": "Beef and Green Bean Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "green-beans",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 430,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉（beef）、四季豆（green beans）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "beef-egg-noodle-stir-fry",
+    "title": "Beef Egg Noodle Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "egg-noodles",
+      "bok-choy",
+      "onion",
+      "bean-sprouts"
+    ],
+    "calories": 610,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉（beef）、鸡蛋面（egg noodles）、小白菜（bok choy）、洋葱（onion）、豆芽（bean sprouts）"
+  },
+  {
+    "id": "beef-tomato-potato-stew",
+    "title": "Beef Tomato Potato Stew",
+    "cuisine": "European / American",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "potato",
+      "tomato",
+      "carrot",
+      "onion",
+      "celery"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉（beef）、土豆（potato）、番茄（tomato）、胡萝卜（carrot）、洋葱（onion）、芹菜（celery）"
+  },
+  {
+    "id": "beef-lettuce-wraps",
+    "title": "Beef Lettuce Wraps",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "lettuce",
+      "carrot",
+      "green-onion",
+      "soy-sauce",
+      "ginger"
+    ],
+    "calories": 390,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、生菜（lettuce）、胡萝卜（carrot）、葱（green onion）、酱油（soy sauce）、生姜（ginger）"
+  },
+  {
+    "id": "beef-ramen-bowl",
+    "title": "Beef Ramen Bowl",
+    "cuisine": "East Asian",
+    "proteinGroup": "Beef",
+    "required": [
+      "beef",
+      "ramen-noodles",
+      "bok-choy",
+      "mushroom",
+      "green-onion"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉（beef）、拉面（ramen noodles）、小白菜（bok choy）、蘑菇（mushroom）、葱（green onion）"
+  },
+  {
+    "id": "korean-style-beef-rice-bowl",
+    "title": "Korean-Style Beef Rice Bowl",
+    "cuisine": "Korean-inspired",
+    "proteinGroup": "Beef",
+    "required": [
+      "ground-beef",
+      "rice",
+      "cucumber",
+      "green-onion",
+      "soy-sauce"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "牛肉末（ground beef）、米饭/大米（rice）、黄瓜（cucumber）、葱（green onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "pork-and-cabbage-stir-fry",
+    "title": "Pork and Cabbage Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "cabbage",
+      "carrot",
+      "garlic"
+    ],
+    "calories": 430,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、卷心菜（cabbage）、胡萝卜（carrot）、大蒜（garlic）"
+  },
+  {
+    "id": "mapo-tofu-with-pork",
+    "title": "Mapo Tofu with Pork",
+    "cuisine": "Chinese",
+    "proteinGroup": "Pork",
+    "required": [
+      "ground-pork",
+      "tofu",
+      "chili-bean-paste",
+      "green-onion"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉末（ground pork）、豆腐（tofu）、辣豆瓣酱（chili bean paste）、葱（green onion）"
+  },
+  {
+    "id": "pork-fried-rice",
+    "title": "Pork Fried Rice",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "rice",
+      "eggs",
+      "carrot",
+      "peas"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、米饭/大米（rice）、鸡蛋（egg）、胡萝卜（carrot）、豌豆（peas）"
+  },
+  {
+    "id": "filipino-pork-adobo",
+    "title": "Filipino Pork Adobo",
+    "cuisine": "Filipino",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "soy-sauce",
+      "vinegar",
+      "garlic"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "猪肉（pork）、酱油（soy sauce）、醋（vinegar）、大蒜（garlic）"
+  },
+  {
+    "id": "garlic-pork-chops-with-potatoes",
+    "title": "Garlic Pork Chops with Potatoes",
+    "cuisine": "European / American",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork-chops",
+      "garlic",
+      "potato",
+      "lemon"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪排（pork chops）、大蒜（garlic）、土豆（potato）、柠檬（lemon）"
+  },
+  {
+    "id": "pork-and-broccoli-stir-fry",
+    "title": "Pork and Broccoli Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "broccoli",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 440,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、西兰花（broccoli）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "pork-tacos",
+    "title": "Pork Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "tortilla",
+      "cabbage",
+      "tomato",
+      "cilantro"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、墨西哥薄饼（tortilla）、卷心菜（cabbage）、番茄（tomato）、香菜（cilantro）"
+  },
+  {
+    "id": "pork-mushroom-egg-noodles",
+    "title": "Pork Mushroom Egg Noodles",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "mushroom",
+      "egg-noodles",
+      "bok-choy"
+    ],
+    "calories": 630,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、蘑菇（mushroom）、鸡蛋面（egg noodles）、小白菜（bok choy）"
+  },
+  {
+    "id": "pork-quesadilla",
+    "title": "Pork Quesadilla",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "tortilla",
+      "cheese",
+      "onion",
+      "sour-cream"
+    ],
+    "calories": 700,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、墨西哥薄饼（tortilla）、奶酪（cheese）、洋葱（onion）、酸奶油（sour cream）"
+  },
+  {
+    "id": "pork-and-bell-pepper-stir-fry",
+    "title": "Pork and Bell Pepper Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "bell-pepper",
+      "onion",
+      "garlic"
+    ],
+    "calories": 450,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、彩椒（bell pepper）、洋葱（onion）、大蒜（garlic）"
+  },
+  {
+    "id": "pork-sausage-potato-skillet",
+    "title": "Pork Sausage Potato Skillet",
+    "cuisine": "European / American",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork-sausage",
+      "potato",
+      "onion",
+      "bell-pepper"
+    ],
+    "calories": 680,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉香肠（pork sausage）、土豆（potato）、洋葱（onion）、彩椒（bell pepper）"
+  },
+  {
+    "id": "ground-pork-lettuce-cups",
+    "title": "Ground Pork Lettuce Cups",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "ground-pork",
+      "lettuce",
+      "carrot",
+      "green-onion",
+      "soy-sauce"
+    ],
+    "calories": 420,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉末（ground pork）、生菜（lettuce）、胡萝卜（carrot）、葱（green onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "pork-ramen-with-bok-choy",
+    "title": "Pork Ramen with Bok Choy",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "ramen-noodles",
+      "bok-choy",
+      "mushroom",
+      "miso"
+    ],
+    "calories": 680,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "猪肉（pork）、拉面（ramen noodles）、小白菜（bok choy）、蘑菇（mushroom）、味噌（miso）"
+  },
+  {
+    "id": "pork-and-eggplant-stir-fry",
+    "title": "Pork and Eggplant Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Pork",
+    "required": [
+      "pork",
+      "eggplant",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 470,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "猪肉（pork）、茄子（eggplant）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "chicken-and-mushroom-stir-fry",
+    "title": "Chicken and Mushroom Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "mushroom",
+      "onion",
+      "soy-sauce"
+    ],
+    "calories": 390,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、蘑菇（mushroom）、洋葱（onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "thai-red-curry-chicken",
+    "title": "Thai Red Curry Chicken",
+    "cuisine": "Thai",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "coconut-milk",
+      "red-curry-paste",
+      "bell-pepper",
+      "lemongrass"
+    ],
+    "calories": 600,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、椰奶（coconut milk）、红咖喱酱（red curry paste）、彩椒（bell pepper）、香茅（lemongrass）"
+  },
+  {
+    "id": "bbq-chicken-quesadilla",
+    "title": "BBQ Chicken Quesadilla",
+    "cuisine": "American / Tex-Mex",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "bbq-sauce",
+      "tortilla",
+      "cheese",
+      "onion"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、烧烤酱（BBQ sauce）、墨西哥薄饼（tortilla）、奶酪（cheese）、洋葱（onion）"
+  },
+  {
+    "id": "chicken-rice-bowl-with-cucumber",
+    "title": "Chicken Rice Bowl with Cucumber",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "rice",
+      "cucumber",
+      "green-onion",
+      "soy-sauce"
+    ],
+    "calories": 540,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、米饭/大米（rice）、黄瓜（cucumber）、葱（green onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "thai-basil-chicken",
+    "title": "Thai Basil Chicken",
+    "cuisine": "Thai",
+    "proteinGroup": "Poultry",
+    "required": [
+      "ground-chicken",
+      "basil",
+      "garlic",
+      "bell-pepper",
+      "soy-sauce"
+    ],
+    "calories": 420,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉末（ground chicken）、罗勒（basil）、大蒜（garlic）、彩椒（bell pepper）、酱油（soy sauce）"
+  },
+  {
+    "id": "chicken-vegetable-soup",
+    "title": "Chicken Vegetable Soup",
+    "cuisine": "European / American",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "potato",
+      "carrot",
+      "onion",
+      "celery"
+    ],
+    "calories": 380,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、土豆（potato）、胡萝卜（carrot）、洋葱（onion）、芹菜（celery）"
+  },
+  {
+    "id": "chicken-fried-rice",
+    "title": "Chicken Fried Rice",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "rice",
+      "eggs",
+      "carrot",
+      "peas"
+    ],
+    "calories": 600,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、米饭/大米（rice）、鸡蛋（egg）、胡萝卜（carrot）、豌豆（peas）"
+  },
+  {
+    "id": "chicken-and-broccoli-stir-fry",
+    "title": "Chicken and Broccoli Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "broccoli",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 400,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、西兰花（broccoli）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "chicken-tacos",
+    "title": "Chicken Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "tortilla",
+      "tomato",
+      "cabbage",
+      "cilantro"
+    ],
+    "calories": 540,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、墨西哥薄饼（tortilla）、番茄（tomato）、卷心菜（cabbage）、香菜（cilantro）"
+  },
+  {
+    "id": "chicken-tomato-pasta",
+    "title": "Chicken Tomato Pasta",
+    "cuisine": "Italian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "pasta",
+      "tomato",
+      "garlic",
+      "basil"
+    ],
+    "calories": 610,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、意大利面（pasta）、番茄（tomato）、大蒜（garlic）、罗勒（basil）"
+  },
+  {
+    "id": "chicken-potato-coconut-curry",
+    "title": "Chicken Potato Coconut Curry",
+    "cuisine": "South Asian-inspired",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "potato",
+      "coconut-milk",
+      "tomato",
+      "onion",
+      "ginger"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、土豆（potato）、椰奶（coconut milk）、番茄（tomato）、洋葱（onion）、生姜（ginger）"
+  },
+  {
+    "id": "chicken-bell-pepper-rice-bowl",
+    "title": "Chicken Bell Pepper Rice Bowl",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "bell-pepper",
+      "rice",
+      "onion",
+      "soy-sauce"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、彩椒（bell pepper）、米饭/大米（rice）、洋葱（onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "ground-chicken-lettuce-wraps",
+    "title": "Ground Chicken Lettuce Wraps",
+    "cuisine": "East Asian",
+    "proteinGroup": "Poultry",
+    "required": [
+      "ground-chicken",
+      "lettuce",
+      "carrot",
+      "green-onion",
+      "ginger"
+    ],
+    "calories": 350,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡肉末（ground chicken）、生菜（lettuce）、胡萝卜（carrot）、葱（green onion）、生姜（ginger）"
+  },
+  {
+    "id": "chicken-miso-ramen",
+    "title": "Chicken Miso Ramen",
+    "cuisine": "Japanese-inspired",
+    "proteinGroup": "Poultry",
+    "required": [
+      "chicken",
+      "ramen-noodles",
+      "miso",
+      "bok-choy",
+      "green-onion"
+    ],
+    "calories": 610,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡肉（chicken）、拉面（ramen noodles）、味噌（miso）、小白菜（bok choy）、葱（green onion）"
+  },
+  {
+    "id": "turkey-black-bean-tacos",
+    "title": "Turkey Black Bean Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Poultry",
+    "required": [
+      "ground-turkey",
+      "black-beans",
+      "tortilla",
+      "tomato",
+      "romaine"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "火鸡肉末（ground turkey）、黑豆（black beans）、墨西哥薄饼（tortilla）、番茄（tomato）、罗马生菜（romaine）"
+  },
+  {
+    "id": "turkey-stuffed-sweet-potatoes",
+    "title": "Turkey Stuffed Sweet Potatoes",
+    "cuisine": "American",
+    "proteinGroup": "Poultry",
+    "required": [
+      "ground-turkey",
+      "sweet-potato",
+      "spinach",
+      "cheddar",
+      "onion"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "oven",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "火鸡肉末（ground turkey）、红薯（sweet potato）、菠菜（spinach）、切达奶酪（cheddar）、洋葱（onion）"
+  },
+  {
+    "id": "lamb-tomato-rice-bowl",
+    "title": "Lamb Tomato Rice Bowl",
+    "cuisine": "Middle Eastern-inspired",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "rice",
+      "tomato",
+      "onion"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、米饭/大米（rice）、番茄（tomato）、洋葱（onion）"
+  },
+  {
+    "id": "ground-lamb-kofta-bowl",
+    "title": "Ground Lamb Kofta Bowl",
+    "cuisine": "Middle Eastern",
+    "proteinGroup": "Lamb",
+    "required": [
+      "ground-lamb",
+      "rice",
+      "cucumber",
+      "tahini",
+      "cilantro"
+    ],
+    "calories": 720,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "羊肉末（ground lamb）、米饭/大米（rice）、黄瓜（cucumber）、芝麻酱（tahini）、香菜（cilantro）"
+  },
+  {
+    "id": "lamb-and-eggplant-stir-fry",
+    "title": "Lamb and Eggplant Stir-Fry",
+    "cuisine": "East Asian-inspired",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "eggplant",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、茄子（eggplant）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "lamb-potato-stew",
+    "title": "Lamb Potato Stew",
+    "cuisine": "European / Middle Eastern",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "potato",
+      "carrot",
+      "onion",
+      "tomato"
+    ],
+    "calories": 580,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、土豆（potato）、胡萝卜（carrot）、洋葱（onion）、番茄（tomato）"
+  },
+  {
+    "id": "lamb-tacos",
+    "title": "Lamb Tacos",
+    "cuisine": "Mexican-inspired",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "tortilla",
+      "cabbage",
+      "tomato",
+      "cilantro"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、墨西哥薄饼（tortilla）、卷心菜（cabbage）、番茄（tomato）、香菜（cilantro）"
+  },
+  {
+    "id": "lamb-chickpea-tomato-stew",
+    "title": "Lamb Chickpea Tomato Stew",
+    "cuisine": "Middle Eastern",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "chickpeas",
+      "tomato",
+      "onion",
+      "spinach"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、鹰嘴豆（chickpeas）、番茄（tomato）、洋葱（onion）、菠菜（spinach）"
+  },
+  {
+    "id": "ground-lamb-stuffed-bell-peppers",
+    "title": "Ground Lamb Stuffed Bell Peppers",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Lamb",
+    "required": [
+      "ground-lamb",
+      "bell-pepper",
+      "rice",
+      "tomato",
+      "cheese"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "oven",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "羊肉末（ground lamb）、彩椒（bell pepper）、米饭/大米（rice）、番茄（tomato）、奶酪（cheese）"
+  },
+  {
+    "id": "lamb-rice-noodle-stir-fry",
+    "title": "Lamb Rice Noodle Stir-Fry",
+    "cuisine": "East Asian-inspired",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "rice-noodles",
+      "bean-sprouts",
+      "green-onion",
+      "soy-sauce"
+    ],
+    "calories": 630,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、米粉（rice noodles）、豆芽（bean sprouts）、葱（green onion）、酱油（soy sauce）"
+  },
+  {
+    "id": "lamb-mushroom-skillet",
+    "title": "Lamb Mushroom Skillet",
+    "cuisine": "European",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "mushroom",
+      "onion",
+      "butter"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、蘑菇（mushroom）、洋葱（onion）、黄油（butter）"
+  },
+  {
+    "id": "lamb-spinach-coconut-curry",
+    "title": "Lamb Spinach Coconut Curry",
+    "cuisine": "South Asian-inspired",
+    "proteinGroup": "Lamb",
+    "required": [
+      "lamb",
+      "spinach",
+      "coconut-milk",
+      "red-curry-paste",
+      "ginger"
+    ],
+    "calories": 680,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "羊肉（lamb）、菠菜（spinach）、椰奶（coconut milk）、红咖喱酱（red curry paste）、生姜（ginger）"
+  },
+  {
+    "id": "garlic-shrimp-pasta",
+    "title": "Garlic Shrimp Pasta",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "pasta",
+      "garlic",
+      "tomato"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "虾（shrimp）、意大利面（pasta）、大蒜（garlic）、番茄（tomato）"
+  },
+  {
+    "id": "shrimp-fried-rice",
+    "title": "Shrimp Fried Rice",
+    "cuisine": "East Asian",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "rice",
+      "eggs",
+      "carrot",
+      "peas"
+    ],
+    "calories": 570,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "虾（shrimp）、米饭/大米（rice）、鸡蛋（egg）、胡萝卜（carrot）、豌豆（peas）"
+  },
+  {
+    "id": "fish-tacos",
+    "title": "Fish Tacos",
+    "cuisine": "Mexican",
+    "proteinGroup": "Seafood",
+    "required": [
+      "fish",
+      "tortilla",
+      "cabbage",
+      "romaine",
+      "sour-cream"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鱼肉（fish）、墨西哥薄饼（tortilla）、卷心菜（cabbage）、罗马生菜（romaine）、酸奶油（sour cream）"
+  },
+  {
+    "id": "baked-fish-and-potatoes",
+    "title": "Baked Fish and Potatoes",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "fish",
+      "potato",
+      "tomato",
+      "lemon"
+    ],
+    "calories": 480,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "oven",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鱼肉（fish）、土豆（potato）、番茄（tomato）、柠檬（lemon）"
+  },
+  {
+    "id": "shrimp-tacos",
+    "title": "Shrimp Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "tortilla",
+      "cabbage",
+      "tomato",
+      "cilantro"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "虾（shrimp）、墨西哥薄饼（tortilla）、卷心菜（cabbage）、番茄（tomato）、香菜（cilantro）"
+  },
+  {
+    "id": "shrimp-and-broccoli-stir-fry",
+    "title": "Shrimp and Broccoli Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "broccoli",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 350,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "虾（shrimp）、西兰花（broccoli）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "shrimp-tomato-rice-bowl",
+    "title": "Shrimp Tomato Rice Bowl",
+    "cuisine": "East Asian",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "rice",
+      "tomato",
+      "onion"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "虾（shrimp）、米饭/大米（rice）、番茄（tomato）、洋葱（onion）"
+  },
+  {
+    "id": "coconut-shrimp-red-curry",
+    "title": "Coconut Shrimp Red Curry",
+    "cuisine": "Thai",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "coconut-milk",
+      "red-curry-paste",
+      "bell-pepper",
+      "lemongrass"
+    ],
+    "calories": 580,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "虾（shrimp）、椰奶（coconut milk）、红咖喱酱（red curry paste）、彩椒（bell pepper）、香茅（lemongrass）"
+  },
+  {
+    "id": "garlic-cod-rice-bowl",
+    "title": "Garlic Cod Rice Bowl",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "cod",
+      "rice",
+      "garlic",
+      "cucumber",
+      "lemon"
+    ],
+    "calories": 480,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鳕鱼（cod）、米饭/大米（rice）、大蒜（garlic）、黄瓜（cucumber）、柠檬（lemon）"
+  },
+  {
+    "id": "cod-tomato-stew",
+    "title": "Cod Tomato Stew",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "cod",
+      "tomato",
+      "potato",
+      "onion",
+      "celery"
+    ],
+    "calories": 400,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鳕鱼（cod）、番茄（tomato）、土豆（potato）、洋葱（onion）、芹菜（celery）"
+  },
+  {
+    "id": "salmon-miso-rice-bowl",
+    "title": "Salmon Miso Rice Bowl",
+    "cuisine": "Japanese-inspired",
+    "proteinGroup": "Seafood",
+    "required": [
+      "salmon",
+      "rice",
+      "miso",
+      "cucumber",
+      "green-onion"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "三文鱼（salmon）、米饭/大米（rice）、味噌（miso）、黄瓜（cucumber）、葱（green onion）"
+  },
+  {
+    "id": "lemon-salmon-with-asparagus",
+    "title": "Lemon Salmon with Asparagus",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "salmon",
+      "asparagus",
+      "lemon",
+      "butter"
+    ],
+    "calories": 480,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "三文鱼（salmon）、芦笋（asparagus）、柠檬（lemon）、黄油（butter）"
+  },
+  {
+    "id": "salmon-avocado-rice-bowl",
+    "title": "Salmon Avocado Rice Bowl",
+    "cuisine": "Japanese-inspired",
+    "proteinGroup": "Seafood",
+    "required": [
+      "salmon",
+      "avocado",
+      "rice",
+      "cucumber",
+      "soy-sauce"
+    ],
+    "calories": 700,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "三文鱼（salmon）、牛油果（avocado）、米饭/大米（rice）、黄瓜（cucumber）、酱油（soy sauce）"
+  },
+  {
+    "id": "mussels-tomato-pasta",
+    "title": "Mussels Tomato Pasta",
+    "cuisine": "Mediterranean",
+    "proteinGroup": "Seafood",
+    "required": [
+      "mussels",
+      "pasta",
+      "tomato",
+      "garlic"
+    ],
+    "calories": 580,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "贻贝/青口（mussels）、意大利面（pasta）、番茄（tomato）、大蒜（garlic）"
+  },
+  {
+    "id": "shrimp-rice-noodles-with-peanut-sauce",
+    "title": "Shrimp Rice Noodles with Peanut Sauce",
+    "cuisine": "Southeast Asian-inspired",
+    "proteinGroup": "Seafood",
+    "required": [
+      "shrimp",
+      "rice-noodles",
+      "peanut-butter",
+      "soy-sauce",
+      "bean-sprouts"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "虾（shrimp）、米粉（rice noodles）、花生酱（peanut butter）、酱油（soy sauce）、豆芽（bean sprouts）"
+  },
+  {
+    "id": "fish-ramen-with-bok-choy",
+    "title": "Fish Ramen with Bok Choy",
+    "cuisine": "East Asian",
+    "proteinGroup": "Seafood",
+    "required": [
+      "fish",
+      "ramen-noodles",
+      "bok-choy",
+      "mushroom",
+      "miso"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鱼肉（fish）、拉面（ramen noodles）、小白菜（bok choy）、蘑菇（mushroom）、味噌（miso）"
+  },
+  {
+    "id": "tomato-egg-rice",
+    "title": "Tomato Egg Rice",
+    "cuisine": "East Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "eggs",
+      "tomato",
+      "rice",
+      "green-onion"
+    ],
+    "calories": 480,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡蛋（egg）、番茄（tomato）、米饭/大米（rice）、葱（green onion）"
+  },
+  {
+    "id": "tofu-broccoli-stir-fry",
+    "title": "Tofu Broccoli Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tofu",
+      "broccoli",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 350,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "豆腐（tofu）、西兰花（broccoli）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "chana-masala",
+    "title": "Chana Masala",
+    "cuisine": "South Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "chickpeas",
+      "tomato",
+      "onion",
+      "ginger"
+    ],
+    "calories": 450,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鹰嘴豆（chickpeas）、番茄（tomato）、洋葱（onion）、生姜（ginger）"
+  },
+  {
+    "id": "shakshuka",
+    "title": "Shakshuka",
+    "cuisine": "Middle Eastern / North African",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "eggs",
+      "tomato",
+      "bell-pepper",
+      "onion"
+    ],
+    "calories": 350,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "beginner",
+      "comfort"
+    ],
+    "ingredientsRaw": "鸡蛋（egg）、番茄（tomato）、彩椒（bell pepper）、洋葱（onion）"
+  },
+  {
+    "id": "pasta-al-pomodoro",
+    "title": "Pasta al Pomodoro",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "pasta",
+      "tomato",
+      "garlic",
+      "basil"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "comfort"
+    ],
+    "ingredientsRaw": "意大利面（pasta）、番茄（tomato）、大蒜（garlic）、罗勒（basil）"
+  },
+  {
+    "id": "black-bean-tacos",
+    "title": "Black Bean Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "black-beans",
+      "tortilla",
+      "tomato",
+      "romaine",
+      "avocado"
+    ],
+    "calories": 580,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "黑豆（black beans）、墨西哥薄饼（tortilla）、番茄（tomato）、罗马生菜（romaine）、牛油果（avocado）"
+  },
+  {
+    "id": "thai-coconut-vegetable-curry",
+    "title": "Thai Coconut Vegetable Curry",
+    "cuisine": "Thai",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "coconut-milk",
+      "carrot",
+      "bell-pepper",
+      "zucchini",
+      "red-curry-paste",
+      "lemongrass"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "comfort"
+    ],
+    "ingredientsRaw": "椰奶（coconut milk）、胡萝卜（carrot）、彩椒（bell pepper）、西葫芦（zucchini）、红咖喱酱（red curry paste）、香茅（lemongrass）"
+  },
+  {
+    "id": "spanish-tortilla",
+    "title": "Spanish Tortilla",
+    "cuisine": "Spanish",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "potato",
+      "eggs",
+      "onion"
+    ],
+    "calories": 420,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "beginner",
+      "comfort"
+    ],
+    "ingredientsRaw": "土豆（potato）、鸡蛋（egg）、洋葱（onion）"
+  },
+  {
+    "id": "vegetable-fried-rice",
+    "title": "Vegetable Fried Rice",
+    "cuisine": "East Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "rice",
+      "eggs",
+      "carrot",
+      "peas",
+      "bean-sprouts"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "米饭/大米（rice）、鸡蛋（egg）、胡萝卜（carrot）、豌豆（peas）、豆芽（bean sprouts）"
+  },
+  {
+    "id": "coconut-chickpea-curry",
+    "title": "Coconut Chickpea Curry",
+    "cuisine": "South Asian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "chickpeas",
+      "coconut-milk",
+      "tomato",
+      "onion",
+      "spinach"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鹰嘴豆（chickpeas）、椰奶（coconut milk）、番茄（tomato）、洋葱（onion）、菠菜（spinach）"
+  },
+  {
+    "id": "miso-tofu-ramen",
+    "title": "Miso Tofu Ramen",
+    "cuisine": "Japanese-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tofu",
+      "ramen-noodles",
+      "miso",
+      "bok-choy",
+      "green-onion"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "boil",
+    "time": 30,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "豆腐（tofu）、拉面（ramen noodles）、味噌（miso）、小白菜（bok choy）、葱（green onion）"
+  },
+  {
+    "id": "tofu-eggplant-stir-fry",
+    "title": "Tofu Eggplant Stir-Fry",
+    "cuisine": "East Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tofu",
+      "eggplant",
+      "garlic",
+      "soy-sauce"
+    ],
+    "calories": 380,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "豆腐（tofu）、茄子（eggplant）、大蒜（garlic）、酱油（soy sauce）"
+  },
+  {
+    "id": "chickpea-tahini-bowl",
+    "title": "Chickpea Tahini Bowl",
+    "cuisine": "Middle Eastern",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "chickpeas",
+      "cucumber",
+      "tomato",
+      "romaine",
+      "tahini",
+      "lemon"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鹰嘴豆（chickpeas）、黄瓜（cucumber）、番茄（tomato）、罗马生菜（romaine）、芝麻酱（tahini）、柠檬（lemon）"
+  },
+  {
+    "id": "black-bean-quesadilla",
+    "title": "Black Bean Quesadilla",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "black-beans",
+      "tortilla",
+      "cheddar",
+      "onion",
+      "sour-cream"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "黑豆（black beans）、墨西哥薄饼（tortilla）、切达奶酪（cheddar）、洋葱（onion）、酸奶油（sour cream）"
+  },
+  {
+    "id": "mushroom-risotto",
+    "title": "Mushroom Risotto",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "arborio-rice",
+      "mushroom",
+      "butter",
+      "cheese",
+      "onion"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "意式烩饭米（arborio rice）、蘑菇（mushroom）、黄油（butter）、奶酪（cheese）、洋葱（onion）"
+  },
+  {
+    "id": "asparagus-risotto",
+    "title": "Asparagus Risotto",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "arborio-rice",
+      "asparagus",
+      "butter",
+      "cheese",
+      "lemon"
+    ],
+    "calories": 600,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "意式烩饭米（arborio rice）、芦笋（asparagus）、黄油（butter）、奶酪（cheese）、柠檬（lemon）"
+  },
+  {
+    "id": "tomato-basil-risotto",
+    "title": "Tomato Basil Risotto",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "arborio-rice",
+      "tomato",
+      "basil",
+      "cheese",
+      "onion"
+    ],
+    "calories": 580,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "stir-fry",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "意式烩饭米（arborio rice）、番茄（tomato）、罗勒（basil）、奶酪（cheese）、洋葱（onion）"
+  },
+  {
+    "id": "creamy-spinach-pasta",
+    "title": "Creamy Spinach Pasta",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "pasta",
+      "spinach",
+      "cream",
+      "garlic",
+      "cheese"
+    ],
+    "calories": 700,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "意大利面（pasta）、菠菜（spinach）、奶油（cream）、大蒜（garlic）、奶酪（cheese）"
+  },
+  {
+    "id": "broccoli-cheddar-pasta",
+    "title": "Broccoli Cheddar Pasta",
+    "cuisine": "American / Italian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "pasta",
+      "broccoli",
+      "cheddar",
+      "cream"
+    ],
+    "calories": 720,
+    "healthTags": [
+      "High-Calorie Alert"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "意大利面（pasta）、西兰花（broccoli）、切达奶酪（cheddar）、奶油（cream）"
+  },
+  {
+    "id": "cauliflower-cheese-bake",
+    "title": "Cauliflower Cheese Bake",
+    "cuisine": "European / American",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "cauliflower",
+      "cheese",
+      "cream",
+      "butter"
+    ],
+    "calories": 480,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "oven",
+    "time": 35,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "花椰菜（cauliflower）、奶酪（cheese）、奶油（cream）、黄油（butter）"
+  },
+  {
+    "id": "sweet-potato-black-bean-tacos",
+    "title": "Sweet Potato Black Bean Tacos",
+    "cuisine": "Mexican / Tex-Mex",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "sweet-potato",
+      "black-beans",
+      "tortilla",
+      "avocado",
+      "cilantro"
+    ],
+    "calories": 620,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "红薯（sweet potato）、黑豆（black beans）、墨西哥薄饼（tortilla）、牛油果（avocado）、香菜（cilantro）"
+  },
+  {
+    "id": "avocado-chickpea-wrap",
+    "title": "Avocado Chickpea Wrap",
+    "cuisine": "Mediterranean-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tortilla",
+      "avocado",
+      "chickpeas",
+      "lettuce",
+      "tomato"
+    ],
+    "calories": 560,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "墨西哥薄饼（tortilla）、牛油果（avocado）、鹰嘴豆（chickpeas）、生菜（lettuce）、番茄（tomato）"
+  },
+  {
+    "id": "peanut-tofu-rice-noodles",
+    "title": "Peanut Tofu Rice Noodles",
+    "cuisine": "Southeast Asian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tofu",
+      "rice-noodles",
+      "peanut-butter",
+      "bean-sprouts",
+      "cucumber"
+    ],
+    "calories": 650,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "豆腐（tofu）、米粉（rice noodles）、花生酱（peanut butter）、豆芽（bean sprouts）、黄瓜（cucumber）"
+  },
+  {
+    "id": "pineapple-tofu-fried-rice",
+    "title": "Pineapple Tofu Fried Rice",
+    "cuisine": "East Asian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "tofu",
+      "pineapple",
+      "rice",
+      "peas",
+      "green-onion"
+    ],
+    "calories": 540,
+    "healthTags": [
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 20,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "豆腐（tofu）、菠萝（pineapple）、米饭/大米（rice）、豌豆（peas）、葱（green onion）"
+  },
+  {
+    "id": "cucumber-avocado-rice-bowl",
+    "title": "Cucumber Avocado Rice Bowl",
+    "cuisine": "Japanese-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "cucumber",
+      "avocado",
+      "rice",
+      "tofu",
+      "soy-sauce"
+    ],
+    "calories": 600,
+    "healthTags": [
+      "High-Calorie Alert",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "黄瓜（cucumber）、牛油果（avocado）、米饭/大米（rice）、豆腐（tofu）、酱油（soy sauce）"
+  },
+  {
+    "id": "pear-romaine-cheese-salad",
+    "title": "Pear Romaine Cheese Salad",
+    "cuisine": "European-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "pear",
+      "romaine",
+      "cheese",
+      "lemon",
+      "cucumber"
+    ],
+    "calories": 360,
+    "healthTags": [
+      "Low-Calorie"
+    ],
+    "method": "no-cook",
+    "time": 10,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "梨（pear）、罗马生菜（romaine）、奶酪（cheese）、柠檬（lemon）、黄瓜（cucumber）"
+  },
+  {
+    "id": "zucchini-tomato-pasta",
+    "title": "Zucchini Tomato Pasta",
+    "cuisine": "Italian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "zucchini",
+      "tomato",
+      "pasta",
+      "garlic",
+      "basil"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "boil",
+    "time": 25,
+    "audience": [
+      "comfort"
+    ],
+    "ingredientsRaw": "西葫芦（zucchini）、番茄（tomato）、意大利面（pasta）、大蒜（garlic）、罗勒（basil）"
+  },
+  {
+    "id": "egg-and-bok-choy-noodles",
+    "title": "Egg and Bok Choy Noodles",
+    "cuisine": "East Asian",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "eggs",
+      "egg-noodles",
+      "bok-choy",
+      "mushroom",
+      "green-onion"
+    ],
+    "calories": 500,
+    "healthTags": [
+      "Fat-Loss Friendly",
+      "Muscle-Gain Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "鸡蛋（egg）、鸡蛋面（egg noodles）、小白菜（bok choy）、蘑菇（mushroom）、葱（green onion）"
+  },
+  {
+    "id": "chickpea-spinach-coconut-stew",
+    "title": "Chickpea Spinach Coconut Stew",
+    "cuisine": "South Asian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "chickpeas",
+      "spinach",
+      "coconut-milk",
+      "tomato",
+      "ginger"
+    ],
+    "calories": 520,
+    "healthTags": [
+      "Balanced Choice"
+    ],
+    "method": "boil",
+    "time": 40,
+    "audience": [
+      "high-protein",
+      "comfort"
+    ],
+    "ingredientsRaw": "鹰嘴豆（chickpeas）、菠菜（spinach）、椰奶（coconut milk）、番茄（tomato）、生姜（ginger）"
+  },
+  {
+    "id": "zucchini-savory-pancakes",
+    "title": "Zucchini Savory Pancakes",
+    "cuisine": "East Asian-inspired",
+    "proteinGroup": "Vegetarian",
+    "required": [
+      "zucchini",
+      "flour",
+      "eggs",
+      "green-onion"
+    ],
+    "calories": 380,
+    "healthTags": [
+      "Low-Calorie",
+      "Fat-Loss Friendly"
+    ],
+    "method": "stir-fry",
+    "time": 25,
+    "audience": [
+      "high-protein",
+      "beginner"
+    ],
+    "ingredientsRaw": "西葫芦（zucchini）、面粉（flour）、鸡蛋（egg）、葱（green onion）"
+  }
+]

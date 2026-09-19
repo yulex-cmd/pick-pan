@@ -2,7 +2,7 @@
 name: Recipe source boundaries
 description: Preserve the distinction between ingredient matching and complete recipes.
 ---
-The user's uploaded workbook is authoritative for its 30 dish names, cuisines and main ingredient combinations, but does not supply amounts or methods.
+The user's uploaded workbook is authoritative for its 100 dish names, cuisines, main ingredient combinations, calorie estimates, and health tags, but does not supply amounts or methods.
 
 **Why:** Expanding the ingredient picker alone left most combinations unsupported, and presenting generic generated cooking steps would misrepresent the workbook.
 

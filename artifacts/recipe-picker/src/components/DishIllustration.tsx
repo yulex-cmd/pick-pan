@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
 
-type DishType = 'tomato-egg-rice' | 'stir-fry' | 'vegetable-bowl';
+type DishType = 'tomato-egg-rice' | 'stir-fry' | 'vegetable-bowl' | 'noodle-bowl';
 
 interface DishIllustrationProps extends SVGProps<SVGSVGElement> {
   dish: DishType;
@@ -141,6 +141,42 @@ export default function DishIllustration({ dish, className, ...props }: DishIllu
         <circle cx="240" cy="160" r="2" fill="#fff" />
         <circle cx="250" cy="155" r="2" fill="#fff" />
         <circle cx="245" cy="170" r="2" fill="#fff" />
+      </svg>
+    );
+  }
+
+  if (dish === 'noodle-bowl') {
+    return (
+      <svg viewBox="0 0 500 400" className={`w-full h-auto ${className || ''}`} aria-label="Noodle bowl illustration" role="img" {...props}>
+        <path d="M90,240 C40,140 180,50 320,80 C470,110 500,250 400,330 C310,400 140,340 90,240 Z" fill="#f7edda" opacity="0.7" />
+        <ellipse cx="250" cy="305" rx="150" ry="36" fill="#e8dfce" opacity="0.8" />
+        <path d="M95,195 C95,285 155,325 250,325 C345,325 405,285 405,195 Z" fill="#fffaf1" stroke="#e4dacb" strokeWidth="4" />
+        <path d="M115,195 C115,265 165,295 250,295 C335,295 385,265 385,195 Z" fill="#f4dfd3" opacity="0.55" />
+        <ellipse cx="250" cy="195" rx="155" ry="32" fill="#fff" />
+        <ellipse cx="250" cy="195" rx="140" ry="24" fill="#c87952" opacity="0.12" />
+        <path d="M140,200 C170,230 190,175 230,210 C250,230 270,180 310,215 C340,235 360,190 380,205" stroke="#c69032" strokeWidth="8" fill="none" strokeLinecap="round" />
+        <path d="M130,215 C165,250 195,190 235,225 C260,245 285,195 325,228 C350,248 365,205 390,218" stroke="#b8753b" strokeWidth="7" fill="none" strokeLinecap="round" />
+        <path d="M150,230 C185,255 210,210 250,240 C280,258 300,215 340,242" stroke="#dcae35" strokeWidth="6" fill="none" strokeLinecap="round" />
+        <ellipse cx="250" cy="232" rx="70" ry="18" fill="#e06b3f" opacity="0.85" />
+        <ellipse cx="250" cy="228" rx="48" ry="10" fill="#fff" opacity="0.18" />
+        <g transform="translate(175, 175)">
+          <circle cx="0" cy="0" r="28" fill="#f6efe2" />
+          <circle cx="2" cy="1" r="16" fill="#dcae35" />
+          <path d="M-10,-8 A14,14 0 0,1 8,10" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.45" />
+        </g>
+        <g transform="translate(320, 170) rotate(18)">
+          <path d="M0,0 Q22,-28 48,4 Q22,22 0,0 Z" fill="#58a474" />
+          <path d="M10,0 Q22,-12 36,4" stroke="#cde0b4" strokeWidth="3" fill="none" strokeLinecap="round" />
+        </g>
+        <g transform="translate(290, 155) rotate(-12)">
+          <path d="M0,0 Q18,-22 40,2 Q18,18 0,0 Z" fill="#6e9541" />
+        </g>
+        <circle cx="210" cy="210" r="6" fill="#195d44" />
+        <circle cx="210" cy="210" r="2.5" fill="#eef4df" />
+        <circle cx="270" cy="205" r="5" fill="#58a474" />
+        <circle cx="305" cy="220" r="5" fill="#6e9541" />
+        <path d="M390,330 L470,95" stroke="#8f6e4b" strokeWidth="7" fill="none" strokeLinecap="round" />
+        <path d="M404,335 L484,100" stroke="#8f6e4b" strokeWidth="7" fill="none" strokeLinecap="round" />
       </svg>
     );
   }
