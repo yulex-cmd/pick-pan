@@ -914,7 +914,7 @@ export default function RecipePickerApp() {
             <p className="mt-3 text-center font-mono text-[9px] uppercase tracking-[0.12em] text-[#978774]">ideas, not instructions</p>
           </div>
           <div className="mt-6 rounded-[22px] border border-[#ded6c8] bg-[#fbf8f1] p-5"><div className="flex items-start gap-3"><span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-[#f5dfd1] text-[#e06b3f]"><HeartPulse size={17} /></span><div><p className="font-serif text-[17px] font-semibold text-[#42372b]">Use first, waste less</p><p className="mt-1.5 text-[12px] leading-5 text-[#857564]">Mark a selected item with the heart pulse. Recipes using it will rise to the top.</p></div></div></div>
-        </aside>
+         </aside>}
       </div>
 
       </>}
