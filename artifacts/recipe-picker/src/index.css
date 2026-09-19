@@ -478,10 +478,12 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  opacity: .38;
-  background-image: radial-gradient(rgba(45, 36, 27, .06) .7px, transparent .7px);
-  background-size: 8px 8px;
-  mask-image: linear-gradient(to bottom, black, transparent 72%);
+  opacity: .5;
+  background-image: radial-gradient(rgba(45, 36, 27, .06) .7px, transparent .7px),
+                    radial-gradient(circle at top right, rgba(110, 149, 65, 0.1) 0%, transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(224, 107, 63, 0.05) 0%, transparent 40%);
+  background-size: 8px 8px, 100% 100%, 100% 100%;
+  mask-image: linear-gradient(to bottom, black, transparent 80%);
 }
 
 .animate-rise {

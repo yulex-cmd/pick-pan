@@ -29,7 +29,7 @@ export default function KitchenTip() {
   }, []);
   const tip = tips[day % tips.length];
   return (
-    <aside aria-label="Daily kitchen tip" className="animate-float hidden rounded-[22px] border border-[#ded6c8] bg-[#eee6d7] p-5 lg:block">
+    <aside aria-label="Daily kitchen tip" className="animate-float rounded-[22px] border border-[#ded6c8] bg-[#eee6d7] p-5">
       <div className="mb-5 flex items-center justify-between">
         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#8a7966]">Kitchen Tip</span>
         <NotebookPen size={17} className="text-[#e06b3f]" />
