@@ -828,7 +828,7 @@ export default function RecipePickerApp() {
                   <p className="font-serif text-[17px] font-semibold text-[#42372b]">What is in the kitchen?</p>
                   <p className="mt-1 text-[11px] text-[#8a7966]">Search English, Chinese names, or pinyin initials — try <span className="font-mono text-[#195d44]">fq</span>.</p>
                 </div>
-                <span className="font-mono text-[9px] uppercase tracking-[0.13em] text-[#9b8b78]">Choose a mode first</span>
+                 <span className="font-mono text-[9px] uppercase tracking-[0.13em] text-[#9b8b78]">Mode set on home</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-2.5" role="tablist" aria-label="Ingredient entry mode">
                 <button
@@ -868,7 +868,7 @@ export default function RecipePickerApp() {
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
               <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => toggleIngredient(id)} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
             </div>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">{filteredCategories.length === 0 && <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center sm:col-span-2">
+             <div className="mt-6 grid gap-4 sm:grid-cols-2 sm:items-start">{filteredCategories.length === 0 && <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center sm:col-span-2">
               <DishIllustration dish="tomato-egg-rice" className="w-full max-w-[160px] mb-4 opacity-75 grayscale-[0.2]" />
               <p className="font-serif text-lg font-semibold text-[#44372b]">No ingredient found yet.</p>
               <p className="mt-1 text-[13px] text-[#877564]">Try another name or add it in Custom below.</p>
