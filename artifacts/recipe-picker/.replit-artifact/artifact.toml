@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Recipe Picker"
+description = "An English ingredient and kitchen tool picker that combines user choices into recipe ideas and sends each result to YouTube for cooking videos."
+version = "1.0.0"
+id = "artifacts/recipe-picker"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26110
+
+[services.development]
+run = "pnpm --filter @workspace/recipe-picker run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/recipe-picker", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/recipe-picker/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26110"
+BASE_PATH = "/"
