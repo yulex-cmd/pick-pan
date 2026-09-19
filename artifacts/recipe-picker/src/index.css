@@ -529,6 +529,41 @@
   color: #fbf7ee;
 }
 
+.selection-card[data-avoided='true'] .option-mark {
+  background: #f6dcd4;
+  color: #b44d3b;
+}
+
+.toggle-check {
+  appearance: none;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  padding: 2px;
+  background: #d1c5b4;
+  transition: background-color .2s ease;
+  cursor: pointer;
+}
+
+.toggle-check::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #fffaf1;
+  box-shadow: 0 1px 3px rgba(60, 44, 28, .18);
+  transition: transform .2s ease;
+}
+
+.toggle-check:checked {
+  background: #195d44;
+}
+
+.toggle-check:checked::before {
+  transform: translateX(14px);
+}
+
 .result-card {
   animation: rise-in .5s cubic-bezier(.22, .8, .32, 1) both;
 }
