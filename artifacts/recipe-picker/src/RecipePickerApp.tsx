@@ -786,7 +786,7 @@ export default function RecipePickerApp() {
       </section>
       </>}
       {(isPicker || isIngredients) && <>
-      <div className="mx-auto grid max-w-[1240px] gap-8 px-5 pb-20 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:gap-12 lg:px-12">
+      <div className={`mx-auto max-w-[1240px] gap-8 px-5 pb-20 sm:px-8 lg:px-12 ${isIngredients ? 'block' : 'grid lg:grid-cols-[minmax(0,1fr)_minmax(340px,460px)] lg:gap-12'}`}>
         {isPicker ? <div className="flex flex-col gap-6 self-start">
           <section aria-labelledby="on-hand-title" className="rounded-[22px] border border-[#d7e2cb] bg-[#edf4e4] p-5 sm:p-7">
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#52694e]">Your kitchen basket</p>
@@ -868,11 +868,11 @@ export default function RecipePickerApp() {
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
               <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => toggleIngredient(id)} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
             </div>
-            <div className="mt-6 space-y-6">{filteredCategories.length === 0 && <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center">
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">{filteredCategories.length === 0 && <div className="flex flex-col items-center rounded-2xl border border-dashed border-[#cfc3b1] p-10 text-center sm:col-span-2">
               <DishIllustration dish="tomato-egg-rice" className="w-full max-w-[160px] mb-4 opacity-75 grayscale-[0.2]" />
               <p className="font-serif text-lg font-semibold text-[#44372b]">No ingredient found yet.</p>
               <p className="mt-1 text-[13px] text-[#877564]">Try another name or add it in Custom below.</p>
-            </div>}{filteredCategories.map((category) => <div key={category.title}><div className="mb-3 flex items-baseline gap-2"><h3 className="font-serif text-[19px] font-semibold text-[#44372b]">{category.title}</h3><span className="font-mono text-[9px] uppercase tracking-[0.1em] text-[#a39380]">{category.eyebrow}</span></div><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{category.options.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} avoided={avoided.includes(option.id)} urgent={urgent.includes(option.id)} onToggle={() => toggleIngredient(option.id)} onUrgent={() => toggleUrgent(option.id)} />)}</div></div>)}</div>
+            </div>}{filteredCategories.map((category) => <div key={category.title} className="rounded-[22px] border border-[#e2d9ca] bg-[#fffaf1] p-4 sm:p-5"><div className="mb-4 flex items-start justify-between gap-3 border-b border-[#ece3d6] pb-3"><div><h3 className="font-serif text-[19px] font-semibold leading-tight text-[#44372b]">{category.title}</h3><span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.1em] text-[#a39380]">{category.eyebrow}</span></div><span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#edf4e4] font-mono text-[10px] text-[#195d44]">{category.options.length}</span></div><div className="grid grid-cols-2 gap-2.5">{category.options.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} avoided={avoided.includes(option.id)} urgent={urgent.includes(option.id)} onToggle={() => toggleIngredient(option.id)} onUrgent={() => toggleUrgent(option.id)} />)}</div></div>)}</div>
           </div>
 
           <div><SectionHeading number="02" eyebrow="How are we cooking?" title="Kitchen tools" /><div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">{toolOptions.map((option) => <OptionButton key={option.id} option={option} selected={selected.includes(option.id)} onToggle={() => toggleIngredient(option.id)} />)}</div></div>
@@ -881,7 +881,27 @@ export default function RecipePickerApp() {
           <button type="button" onClick={() => navigate('/')} className="min-h-11 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white">Done · Back to home</button>
         </section>}
 
-        <aside className="lg:sticky lg:top-5 lg:self-start">
+        {isIngredients && <section aria-labelledby="ingredient-actions-title" className="mt-8 rounded-[26px] border border-[#d8cebe] bg-[#efe7d9] p-4 shadow-[0_18px_40px_rgba(79,58,35,0.06)] sm:p-5">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-start justify-between gap-3">
+                <div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#8d7b67]">your basket</p><h2 id="ingredient-actions-title" className="mt-1 font-serif text-[22px] font-semibold text-[#33291f]">Ready for the next meal?</h2></div>
+                {(selected.length > 0 || avoided.length > 0 || customItems.length > 0) && <button type="button" onClick={clearAll} className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#9b6950] hover:text-[#e06b3f]"><RotateCcw size={13} /> Clear</button>}
+              </div>
+              <p className="mt-1 text-[12px] text-[#756654]">{selected.length || customItems.length ? `${selected.length + customItems.length} clues ready` : 'Nothing selected yet'}</p>
+              {selected.length > 0 && <div className="mt-3 flex flex-wrap gap-1.5">{selected.map((id) => <button key={id} type="button" onClick={() => toggleUrgent(id)} title={urgent.includes(id) ? 'Use first' : 'Mark to use first'} className={`rounded-full px-2.5 py-1.5 text-[10px] font-medium ${urgent.includes(id) ? 'bg-[#f4d5c7] text-[#b95741]' : 'bg-[#f8f0e4] text-[#776653]'}`}>{ingredientById.get(id)?.label}{urgent.includes(id) && ' · first'}</button>)}</div>}
+              {avoided.length > 0 && <p className="mt-3 text-[10px] text-[#a65242]">Avoiding: {avoided.map((id) => ingredientById.get(id)?.label).join(', ')}</p>}
+              <p className="mt-3 text-[11px] text-[#857564]"><HeartPulse size={13} className="mr-1 inline text-[#e06b3f]" />Tap a selected ingredient to mark it “first”; those recipes will rise to the top.</p>
+            </div>
+            <div className="w-full shrink-0 lg:max-w-[360px]">
+              <label className="flex items-center justify-between rounded-xl border border-[#d9cebd] bg-[#f8f0e4] px-3 py-2.5"><span className="flex items-center gap-2 text-[11px] font-semibold text-[#685846]"><Refrigerator size={14} className="text-[#e06b3f]" /> Clear the fridge first</span><input type="checkbox" checked={clearFridge} onChange={(event) => setClearFridge(event.target.checked)} className="toggle-check" /></label>
+              <button type="button" onClick={generate} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#195d44] px-4 py-3.5 text-[13px] font-semibold text-[#fbf8f1] shadow-[0_7px_0_#0f422f] transition-all hover:-translate-y-0.5 hover:shadow-[0_9px_0_#0f422f] active:translate-y-0.5 active:shadow-[0_4px_0_#0f422f]" data-testid="button-generate"><Search size={17} /> Find my next meal <ArrowUpRight size={16} /></button>
+              <p className="mt-3 text-center font-mono text-[9px] uppercase tracking-[0.12em] text-[#978774]">ideas, not instructions</p>
+            </div>
+          </div>
+        </section>}
+
+        {isPicker && <aside className="lg:sticky lg:top-5 lg:self-start">
           <div className="rounded-[26px] border border-[#d8cebe] bg-[#efe7d9] p-4 shadow-[0_18px_40px_rgba(79,58,35,0.06)] sm:p-5">
             <div className="mb-4 flex items-center justify-between"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#8d7b67]">your kitchen</p><h2 className="mt-1 font-serif text-[22px] font-semibold text-[#33291f]">What kind of help?</h2></div><span className="flex size-9 items-center justify-center rounded-xl bg-[#f8f2e8] text-[#e06b3f]"><Refrigerator size={18} /></span></div>
             <div className="space-y-2">{modes.map((item) => <button key={item.id} type="button" onClick={() => setMode(item.id)} className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition-all ${mode === item.id ? 'border-[#195d44] bg-[#f7fbef] shadow-[0_5px_14px_rgba(25,93,68,0.08)]' : 'border-[#ddd2c2] bg-[#f7f1e7] hover:border-[#b8aa97]'}`} aria-pressed={mode === item.id}><span className={`font-mono text-[10px] ${mode === item.id ? 'text-[#e06b3f]' : 'text-[#9a8a77]'}`}>{item.mark}</span><span className="min-w-0 flex-1"><span className="block text-[13px] font-semibold text-[#42372b]">{item.label}</span><span className="mt-0.5 block text-[11px] text-[#8a7966]">{item.description}</span></span><span className={`size-2 rounded-full ${mode === item.id ? 'bg-[#195d44]' : 'bg-[#d1c5b4]'}`} /></button>)}</div>
