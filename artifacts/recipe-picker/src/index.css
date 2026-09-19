@@ -534,6 +534,29 @@
   color: #b44d3b;
 }
 
+.entry-mode-card {
+  transition: transform .2s ease, border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+}
+
+.entry-mode-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(70, 50, 32, .08);
+}
+
+.entry-mode-card-active-have {
+  border-color: #195d44;
+  background: #eef4df;
+  color: #195d44;
+  box-shadow: inset 0 0 0 1px rgba(25, 93, 68, .12), 0 7px 18px rgba(25, 93, 68, .12);
+}
+
+.entry-mode-card-active-avoid {
+  border-color: #b24f3e;
+  background: #fff0eb;
+  color: #9d4335;
+  box-shadow: inset 0 0 0 1px rgba(178, 79, 62, .12), 0 7px 18px rgba(178, 79, 62, .1);
+}
+
 .toggle-check {
   appearance: none;
   width: 34px;

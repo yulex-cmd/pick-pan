@@ -100,40 +100,59 @@ type MatchInfo = {
 };
 
 const categories: { title: string; eyebrow: string; ids: string[] }[] = [
-  { title: 'Vegetables', eyebrow: 'produce drawer', ids: ['tomato', 'onion', 'greens', 'potato', 'carrot', 'cucumber'] },
-  { title: 'Meat, poultry & eggs', eyebrow: 'protein shelf', ids: ['chicken', 'pork', 'beef', 'eggs'] },
-  { title: 'Fish & seafood', eyebrow: 'from the sea', ids: ['shrimp', 'fish'] },
-  { title: 'Tofu & mushrooms', eyebrow: 'plant-forward', ids: ['tofu', 'mushroom', 'beans'] },
-  { title: 'Staples & dry goods', eyebrow: 'pantry shelf', ids: ['rice', 'noodles', 'pasta', 'bread'] },
-  { title: 'Common seasonings', eyebrow: 'small but mighty', ids: ['garlic', 'soy-sauce', 'vinegar', 'oil', 'salt', 'spices'] },
+  { title: 'Vegetables & mushrooms', eyebrow: 'produce drawer · 10+', ids: ['broccoli', 'bell-pepper', 'onion', 'tomato', 'cabbage', 'carrot', 'potato', 'mushroom', 'cucumber', 'garlic', 'greens'] },
+  { title: 'Meat & poultry', eyebrow: 'protein shelf · 7', ids: ['beef', 'ground-beef', 'pork', 'ground-pork', 'pork-chops', 'chicken', 'ground-chicken'] },
+  { title: 'Fish & shrimp', eyebrow: 'from the sea · 2', ids: ['shrimp', 'fish'] },
+  { title: 'Beans & tofu', eyebrow: 'plant-forward · 5+', ids: ['peas', 'tofu', 'chickpeas', 'lentils', 'black-beans', 'beans'] },
+  { title: 'Eggs & dairy', eyebrow: 'fridge friends · 3', ids: ['eggs', 'yogurt', 'cheese'] },
+  { title: 'Staples', eyebrow: 'pantry shelf · 3+', ids: ['pasta', 'tortilla', 'rice', 'noodles', 'bread'] },
+  { title: 'Seasonings & herbs', eyebrow: 'small but mighty · 4+', ids: ['chili-bean-paste', 'soy-sauce', 'vinegar', 'basil', 'oil', 'salt', 'spices'] },
+  { title: 'Other cooking ingredients', eyebrow: 'special extras · 1', ids: ['coconut-milk'] },
 ];
 
 const ingredients: Ingredient[] = [
-  { id: 'tomato', label: 'Tomatoes', note: '番茄 · juicy + bright', aliases: ['tomato', 'tomatoes', '番茄', '西红柿', '洋柿子', 'fq', 'xhs'], category: 'Vegetables', icon: Apple },
-  { id: 'onion', label: 'Onion', note: '洋葱 · the good base', aliases: ['onion', '洋葱', 'yc'], category: 'Vegetables', icon: Sprout },
-  { id: 'greens', label: 'Leafy greens', note: '菠菜 · spinach, kale, chard', aliases: ['greens', 'spinach', 'kale', '菠菜', '青菜', 'sc'], category: 'Vegetables', icon: Leaf },
-  { id: 'potato', label: 'Potatoes', note: '土豆 · always dependable', aliases: ['potato', 'potatoes', '土豆', '马铃薯', 'td'], category: 'Vegetables', icon: Apple },
-  { id: 'carrot', label: 'Carrot', note: '胡萝卜 · sweet crunch', aliases: ['carrot', '胡萝卜', '萝卜', 'hll'], category: 'Vegetables', icon: Apple },
-  { id: 'cucumber', label: 'Cucumber', note: '黄瓜 · cool + crisp', aliases: ['cucumber', '黄瓜', 'hg'], category: 'Vegetables', icon: Sprout },
-  { id: 'chicken', label: 'Chicken', note: '鸡肉 · thighs or breast', aliases: ['chicken', '鸡肉', '鸡胸', 'jr'], category: 'Meat, poultry & eggs', icon: Utensils },
-  { id: 'pork', label: 'Pork', note: '猪肉 · thin slices work', aliases: ['pork', '猪肉', '五花肉', '猪', 'zr'], category: 'Meat, poultry & eggs', icon: Utensils },
-  { id: 'beef', label: 'Beef', note: '牛肉 · quick-cooking cuts', aliases: ['beef', '牛肉', '牛', 'nr'], category: 'Meat, poultry & eggs', icon: Utensils },
-  { id: 'eggs', label: 'Eggs', note: '鸡蛋 · the great fixer', aliases: ['egg', 'eggs', '鸡蛋', '蛋', 'jd'], category: 'Meat, poultry & eggs', icon: Egg },
-  { id: 'shrimp', label: 'Shrimp', note: '虾 · cooks in minutes', aliases: ['shrimp', 'prawn', '虾', 'xia'], category: 'Fish & seafood', icon: Fish },
-  { id: 'fish', label: 'Fish', note: '鱼 · fillets welcome', aliases: ['fish', '鱼', '鱼肉', 'yu'], category: 'Fish & seafood', icon: Fish },
-  { id: 'tofu', label: 'Tofu', note: '豆腐 · soft or firm', aliases: ['tofu', '豆腐', 'df'], category: 'Tofu & mushrooms', icon: Bean },
-  { id: 'mushroom', label: 'Mushrooms', note: '菌菇 · deep + savory', aliases: ['mushroom', 'mushrooms', '菌菇', '蘑菇', 'mg'], category: 'Tofu & mushrooms', icon: Sprout },
-  { id: 'beans', label: 'Beans', note: '豆类 · canned counts', aliases: ['beans', 'bean', '豆子', '豆类', 'dz'], category: 'Tofu & mushrooms', icon: Bean },
-  { id: 'rice', label: 'Rice', note: '米饭 · white, brown, sticky', aliases: ['rice', '米', '米饭', '大米', 'm'], category: 'Staples & dry goods', icon: Wheat },
-  { id: 'noodles', label: 'Noodles', note: '面条 · any shape works', aliases: ['noodle', 'noodles', '面', '面条', 'mt'], category: 'Staples & dry goods', icon: Wheat },
-  { id: 'pasta', label: 'Pasta', note: '意面 · pantry reliable', aliases: ['pasta', '意面', 'spaghetti'], category: 'Staples & dry goods', icon: Wheat },
-  { id: 'bread', label: 'Bread', note: '面包 · even slightly stale', aliases: ['bread', '面包', 'mb'], category: 'Staples & dry goods', icon: Wheat },
-  { id: 'garlic', label: 'Garlic', note: '大蒜 · one clove is plenty', aliases: ['garlic', '大蒜', '蒜', 'ds'], category: 'Common seasonings', icon: Sprout },
-  { id: 'soy-sauce', label: 'Soy sauce', note: '生抽 · instant depth', aliases: ['soy', 'soy sauce', '生抽', '酱油', 'sc'], category: 'Common seasonings', icon: Soup },
-  { id: 'vinegar', label: 'Vinegar', note: '醋 · a bright finish', aliases: ['vinegar', '醋', 'cu'], category: 'Common seasonings', icon: Soup },
-  { id: 'oil', label: 'Cooking oil', note: '油 · for the hot pan', aliases: ['oil', 'cooking oil', '食用油', '油'], category: 'Common seasonings', icon: CookingPot },
-  { id: 'salt', label: 'Salt', note: '盐 · always nearby', aliases: ['salt', '盐', 'yan'], category: 'Common seasonings', icon: Soup },
-  { id: 'spices', label: 'Dried spices', note: '香料 · open the cupboard', aliases: ['spice', 'spices', '香料', '辣椒', 'xl'], category: 'Common seasonings', icon: Flame },
+  { id: 'broccoli', label: 'Broccoli', note: '西兰花 · green + crisp', aliases: ['broccoli', '西兰花', 'xlh'], category: 'Vegetables & mushrooms', icon: Leaf },
+  { id: 'bell-pepper', label: 'Bell pepper', note: '彩椒 · sweet crunch', aliases: ['bell pepper', 'pepper', '彩椒', '青椒', '椒', 'cj'], category: 'Vegetables & mushrooms', icon: Apple },
+  { id: 'tomato', label: 'Tomatoes', note: '番茄 · juicy + bright', aliases: ['tomato', 'tomatoes', '番茄', '西红柿', '洋柿子', 'fq', 'xhs'], category: 'Vegetables & mushrooms', icon: Apple },
+  { id: 'onion', label: 'Onion', note: '洋葱 · the good base', aliases: ['onion', '洋葱', 'yc'], category: 'Vegetables & mushrooms', icon: Sprout },
+  { id: 'cabbage', label: 'Cabbage', note: '卷心菜 · sweet + sturdy', aliases: ['cabbage', '卷心菜', '包菜', 'jx菜'], category: 'Vegetables & mushrooms', icon: Leaf },
+  { id: 'carrot', label: 'Carrot', note: '胡萝卜 · sweet crunch', aliases: ['carrot', '胡萝卜', '萝卜', 'hll'], category: 'Vegetables & mushrooms', icon: Apple },
+  { id: 'potato', label: 'Potatoes', note: '土豆 · always dependable', aliases: ['potato', 'potatoes', '土豆', '马铃薯', 'td'], category: 'Vegetables & mushrooms', icon: Apple },
+  { id: 'mushroom', label: 'Mushrooms', note: '菌菇 · deep + savory', aliases: ['mushroom', 'mushrooms', '菌菇', '蘑菇', 'mg'], category: 'Vegetables & mushrooms', icon: Sprout },
+  { id: 'cucumber', label: 'Cucumber', note: '黄瓜 · cool + crisp', aliases: ['cucumber', '黄瓜', 'hg'], category: 'Vegetables & mushrooms', icon: Sprout },
+  { id: 'garlic', label: 'Garlic', note: '大蒜 · one clove is plenty', aliases: ['garlic', '大蒜', '蒜', 'ds'], category: 'Seasonings & herbs', icon: Sprout },
+  { id: 'greens', label: 'Leafy greens', note: '菠菜 · spinach, kale, chard', aliases: ['greens', 'spinach', 'kale', '菠菜', '青菜', 'sc'], category: 'Vegetables & mushrooms', icon: Leaf },
+  { id: 'beef', label: 'Beef', note: '牛肉 · quick-cooking cuts', aliases: ['beef', '牛肉', '牛', 'nr'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'ground-beef', label: 'Ground beef', note: '牛肉末 · fast + versatile', aliases: ['ground beef', 'minced beef', '牛肉末', 'nrm'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'pork', label: 'Pork', note: '猪肉 · thin slices work', aliases: ['pork', '猪肉', '五花肉', '猪', 'zr'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'ground-pork', label: 'Ground pork', note: '猪肉末 · juicy + quick', aliases: ['ground pork', 'minced pork', '猪肉末', 'zrm'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'pork-chops', label: 'Pork chops', note: '猪排 · pan-ready', aliases: ['pork chops', 'pork chop', '猪排', 'zp'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'chicken', label: 'Chicken', note: '鸡肉 · thighs or breast', aliases: ['chicken', '鸡肉', '鸡胸', 'jr'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'ground-chicken', label: 'Ground chicken', note: '鸡肉末 · lean + light', aliases: ['ground chicken', 'minced chicken', '鸡肉末', 'jrm'], category: 'Meat & poultry', icon: Utensils },
+  { id: 'shrimp', label: 'Shrimp', note: '虾 · cooks in minutes', aliases: ['shrimp', 'prawn', '虾', 'xia'], category: 'Fish & shrimp', icon: Fish },
+  { id: 'fish', label: 'Fish', note: '鱼 · fillets welcome', aliases: ['fish', '鱼', '鱼肉', 'yu'], category: 'Fish & shrimp', icon: Fish },
+  { id: 'peas', label: 'Peas', note: '豌豆 · sweet + easy', aliases: ['peas', 'pea', '豌豆', 'wd'], category: 'Beans & tofu', icon: Bean },
+  { id: 'tofu', label: 'Tofu', note: '豆腐 · soft or firm', aliases: ['tofu', '豆腐', 'df'], category: 'Beans & tofu', icon: Bean },
+  { id: 'chickpeas', label: 'Chickpeas', note: '鹰嘴豆 · hearty pantry staple', aliases: ['chickpeas', 'chickpea', '鹰嘴豆', 'yzd'], category: 'Beans & tofu', icon: Bean },
+  { id: 'lentils', label: 'Lentils', note: '扁豆 · earthy + filling', aliases: ['lentils', 'lentil', '扁豆', 'bd'], category: 'Beans & tofu', icon: Bean },
+  { id: 'black-beans', label: 'Black beans', note: '黑豆 · rich + creamy', aliases: ['black beans', 'black bean', '黑豆', 'hd'], category: 'Beans & tofu', icon: Bean },
+  { id: 'beans', label: 'Beans', note: '豆类 · canned counts', aliases: ['beans', 'bean', '豆子', '豆类', 'dz'], category: 'Beans & tofu', icon: Bean },
+  { id: 'eggs', label: 'Eggs', note: '鸡蛋 · the great fixer', aliases: ['egg', 'eggs', '鸡蛋', '蛋', 'jd'], category: 'Eggs & dairy', icon: Egg },
+  { id: 'yogurt', label: 'Yogurt', note: '酸奶 · cool + tangy', aliases: ['yogurt', 'yoghurt', '酸奶', 'sn'], category: 'Eggs & dairy', icon: Soup },
+  { id: 'cheese', label: 'Cheese', note: '奶酪 · something melty', aliases: ['cheese', '奶酪', '芝士', 'nl'], category: 'Eggs & dairy', icon: Soup },
+  { id: 'pasta', label: 'Pasta', note: '意大利面 · pantry reliable', aliases: ['pasta', '意大利面', '意面', 'spaghetti'], category: 'Staples', icon: Wheat },
+  { id: 'tortilla', label: 'Tortilla', note: '墨西哥薄饼 · wrap it up', aliases: ['tortilla', '墨西哥薄饼', '薄饼', 'bj'], category: 'Staples', icon: Wheat },
+  { id: 'rice', label: 'Rice', note: '米 · white, brown, sticky', aliases: ['rice', '米', '米饭', '大米', 'm'], category: 'Staples', icon: Wheat },
+  { id: 'noodles', label: 'Noodles', note: '面条 · any shape works', aliases: ['noodle', 'noodles', '面', '面条', 'mt'], category: 'Staples', icon: Wheat },
+  { id: 'bread', label: 'Bread', note: '面包 · even slightly stale', aliases: ['bread', '面包', 'mb'], category: 'Staples', icon: Wheat },
+  { id: 'chili-bean-paste', label: 'Chili bean paste', note: '辣豆瓣酱 · savory heat', aliases: ['chili bean paste', 'doubanjiang', '辣豆瓣酱', '豆瓣酱', 'ldb'], category: 'Seasonings & herbs', icon: Flame },
+  { id: 'soy-sauce', label: 'Soy sauce', note: '酱油 · instant depth', aliases: ['soy', 'soy sauce', '生抽', '酱油', 'sc'], category: 'Seasonings & herbs', icon: Soup },
+  { id: 'vinegar', label: 'Vinegar', note: '醋 · a bright finish', aliases: ['vinegar', '醋', 'cu'], category: 'Seasonings & herbs', icon: Soup },
+  { id: 'basil', label: 'Basil', note: '罗勒 · fresh + fragrant', aliases: ['basil', '罗勒', 'le'], category: 'Seasonings & herbs', icon: Leaf },
+  { id: 'oil', label: 'Cooking oil', note: '油 · for the hot pan', aliases: ['oil', 'cooking oil', '食用油', '油'], category: 'Seasonings & herbs', icon: CookingPot },
+  { id: 'salt', label: 'Salt', note: '盐 · always nearby', aliases: ['salt', '盐', 'yan'], category: 'Seasonings & herbs', icon: Soup },
+  { id: 'spices', label: 'Dried spices', note: '香料 · open the cupboard', aliases: ['spice', 'spices', '香料', '辣椒', 'xl'], category: 'Seasonings & herbs', icon: Flame },
+  { id: 'coconut-milk', label: 'Coconut milk', note: '椰奶 · creamy + mellow', aliases: ['coconut milk', '椰奶', 'yn'], category: 'Other cooking ingredients', icon: Soup },
 ];
 
 const toolOptions: Option[] = [
@@ -656,7 +675,35 @@ export default function RecipePickerApp() {
           <div>
             <SectionHeading number="01" eyebrow="Start with what is around" title="Build your kitchen basket"><span className="rounded-full bg-[#195d44] px-3 py-1.5 font-mono text-[10px] text-[#fbf8f1]">{selected.length} have · {avoided.length} avoid</span></SectionHeading>
             <div className="rounded-[22px] border border-[#ded6c8] bg-[#f9f4eb] p-4 sm:p-5">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="font-serif text-[17px] font-semibold text-[#42372b]">What is in the kitchen?</p><p className="mt-1 text-[11px] text-[#8a7966]">Search English, Chinese names, or pinyin initials — try <span className="font-mono text-[#195d44]">fq</span>.</p></div><div className="flex rounded-xl bg-[#eee5d8] p-1"><button type="button" onClick={() => setEntryMode('have')} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-[11px] font-semibold ${entryMode === 'have' ? 'bg-[#fffaf1] text-[#195d44] shadow-sm' : 'text-[#877563]'}`}><Check size={13} /> I have</button><button type="button" onClick={() => setEntryMode('avoid')} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-[11px] font-semibold ${entryMode === 'avoid' ? 'bg-[#fffaf1] text-[#b24f3e] shadow-sm' : 'text-[#877563]'}`}><ShieldAlert size={13} /> I avoid</button></div></div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="font-serif text-[17px] font-semibold text-[#42372b]">What is in the kitchen?</p>
+                  <p className="mt-1 text-[11px] text-[#8a7966]">Search English, Chinese names, or pinyin initials — try <span className="font-mono text-[#195d44]">fq</span>.</p>
+                </div>
+                <span className="font-mono text-[9px] uppercase tracking-[0.13em] text-[#9b8b78]">Choose a mode first</span>
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-2.5" role="tablist" aria-label="Ingredient entry mode">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={entryMode === 'have'}
+                  onClick={() => setEntryMode('have')}
+                  className={`entry-mode-card flex min-h-[76px] items-center gap-3 rounded-2xl border px-3.5 py-3 text-left ${entryMode === 'have' ? 'entry-mode-card-active-have' : 'border-[#d9cebd] bg-[#fffaf1] text-[#756654] hover:border-[#79a488]'}`}
+                >
+                  <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${entryMode === 'have' ? 'bg-[#195d44] text-[#fffaf1]' : 'bg-[#edf3e4] text-[#548060]'}`}><Check size={19} strokeWidth={2.5} /></span>
+                  <span className="min-w-0"><span className="block text-[14px] font-bold">I have</span><span className="mt-1 block text-[10px] leading-4 opacity-75">Add what is in your kitchen</span></span>
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={entryMode === 'avoid'}
+                  onClick={() => setEntryMode('avoid')}
+                  className={`entry-mode-card flex min-h-[76px] items-center gap-3 rounded-2xl border px-3.5 py-3 text-left ${entryMode === 'avoid' ? 'entry-mode-card-active-avoid' : 'border-[#d9cebd] bg-[#fffaf1] text-[#756654] hover:border-[#d28b7c]'}`}
+                >
+                  <span className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${entryMode === 'avoid' ? 'bg-[#b24f3e] text-[#fffaf1]' : 'bg-[#f8e8e1] text-[#b45a49]'}`}><ShieldAlert size={18} /></span>
+                  <span className="min-w-0"><span className="block text-[14px] font-bold">I avoid</span><span className="mt-1 block text-[10px] leading-4 opacity-75">Exclude allergies or dislikes</span></span>
+                </button>
+              </div>
               <label className="mt-4 flex items-center gap-2 rounded-xl border border-[#ded4c4] bg-[#fffdf8] px-3.5 py-3"><Search size={16} className="shrink-0 text-[#9c8b77]" /><input value={searchInput} onChange={(event) => setSearchInput(event.target.value)} placeholder="Search tomato, fq, 洋柿子..." className="min-w-0 flex-1 bg-transparent text-[13px] text-[#33291f] outline-none placeholder:text-[#aaa092]" aria-label="Search ingredients" /><span className="hidden rounded-md bg-[#f2e9dc] px-2 py-1 font-mono text-[9px] text-[#958471] sm:inline">⌘ K</span></label>
               <div className="mt-4"><div className="mb-2 flex items-center gap-2"><Sparkles size={14} className="text-[#e06b3f]" /><span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8e7d69]">popular picks</span></div><div className="flex gap-2 overflow-x-auto pb-1">{quickPicks.map((id) => { const item = ingredientById.get(id); if (!item) return null; const picked = selected.includes(id); return <button key={id} type="button" onClick={() => { setEntryMode('have'); toggleIngredient(id); }} className={`shrink-0 rounded-full border px-3 py-2 text-[11px] font-semibold ${picked ? 'border-[#195d44] bg-[#195d44] text-[#fffaf1]' : 'border-[#d9cebd] bg-[#fffaf1] text-[#695947] hover:border-[#195d44]'}`}>{item.label}</button>; })}</div></div>
             </div>
