@@ -48,6 +48,7 @@ type MethodFilter = 'all' | RecipeMethod;
 type AudienceFilter = 'all' | RecipeAudience;
 type RecipeMethod = 'stir-fry' | 'steam' | 'boil' | 'no-cook' | 'air-fryer' | 'oven';
 type RecipeAudience = 'beginner' | 'high-protein' | 'comfort';
+type HealthGoal = 'none' | 'lower-calorie' | 'fat-loss' | 'muscle-gain' | 'balanced';
 
 type Ingredient = {
   id: string;
@@ -94,6 +95,8 @@ type Recipe = {
   ingredients: Amount[];
   steps: Step[];
   substitutes: { missing: string; replacement: string }[];
+  calories?: number;
+  healthTags?: string[];
 };
 
 type MatchInfo = {
@@ -394,6 +397,14 @@ const modes: { id: Mode; label: string; description: string; mark: string }[] = 
   { id: 'fuzzy', label: 'Fuzzy match', description: 'Creative ideas with flexible swaps.', mark: '01' },
   { id: 'strict', label: 'Strict match', description: 'Only ideas that fit your basket.', mark: '02' },
   { id: 'survival', label: 'Survival mode', description: 'Simple, forgiving, and filling.', mark: '03' },
+];
+
+const healthGoals: { id: HealthGoal; label: string; description: string }[] = [
+  { id: 'none', label: 'No preference', description: 'Let the ingredient match lead.' },
+  { id: 'lower-calorie', label: 'Lower calorie', description: 'Lighter ideas with more produce.' },
+  { id: 'fat-loss', label: 'Fat-loss friendly', description: 'Filling, protein-forward choices.' },
+  { id: 'muscle-gain', label: 'Muscle-gain friendly', description: 'Prioritize protein and substance.' },
+  { id: 'balanced', label: 'Balanced meal', description: 'A little protein, produce, and fuel.' },
 ];
 
 const ingredientById = new Map(ingredients.map((item) => [item.id, item]));
