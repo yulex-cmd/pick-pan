@@ -474,7 +474,34 @@ const makeSpreadsheetRecipe = (recipe: SpreadsheetRecipe): Recipe => ({
   substitutes: [],
 });
 
-const allRecipes: Recipe[] = [...recipes, ...spreadsheetRecipes.map(makeSpreadsheetRecipe)];
+const calorieEstimates: Record<string, number> = {
+  'tomato-egg-rice': 430,
+  'garlic-pork-stir-fry': 520,
+  'crispy-potato-tofu': 470,
+  'shrimp-garlic-noodles': 495,
+  'mushroom-rice-bowl': 390,
+  'sheet-pan-chicken': 510,
+  'steamed-tofu-egg': 275,
+  'tomato-cucumber-salad': 145,
+};
+
+const vegetableIngredientIds = new Set(['broccoli', 'bell-pepper', 'tomato', 'onion', 'cabbage', 'carrot', 'potato', 'mushroom', 'cucumber', 'greens', 'peas']);
+const proteinIngredientIds = new Set(['beef', 'ground-beef', 'pork', 'ground-pork', 'pork-chops', 'chicken', 'ground-chicken', 'shrimp', 'fish', 'tofu', 'eggs', 'yogurt', 'cheese', 'chickpeas', 'lentils', 'black-beans', 'beans']);
+
+const getHealthTags = (recipe: Recipe) => {
+  const tags: string[] = [];
+  if (recipe.required.some((id) => vegetableIngredientIds.has(id))) tags.push('vegetable-forward');
+  if (recipe.required.some((id) => proteinIngredientIds.has(id)) || recipe.audience.includes('high-protein')) tags.push('high-protein');
+  if (recipe.method === 'no-cook' || recipe.method === 'steam' || recipe.time <= 20) tags.push('light & quick');
+  if (tags.length < 2 && recipe.required.some((id) => ['rice', 'pasta', 'noodles', 'potato', 'bread', 'tortilla'].includes(id))) tags.push('satisfying fuel');
+  return tags.length > 0 ? tags.slice(0, 3) : ['balanced'];
+};
+
+const allRecipes: Recipe[] = [...recipes, ...spreadsheetRecipes.map(makeSpreadsheetRecipe)].map((recipe) => ({
+  ...recipe,
+  calories: calorieEstimates[recipe.id],
+  healthTags: getHealthTags(recipe),
+}));
 
 function SectionHeading({ number, eyebrow, title, children }: { number: string; eyebrow: string; title: string; children?: ReactNode }) {
   return (
@@ -531,6 +558,7 @@ function RecipeCard({ recipe, index, match, onOpen, confirmed, onConfirm }: { re
   const Icon = recipe.icon;
   const youtubeUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${recipe.title} easy recipe`)}`;
   const statusLabel = match.status === 'complete' ? '100% match' : match.status === 'partial' ? `${match.score}% match · ${match.missing.length} to pick up` : match.status === 'blocked' ? 'Not for you today' : `${match.score}% match`;
+  const calorieLabel = recipe.calories ? `~${recipe.calories} kcal / serving` : 'Not estimated from sheet';
   return (
     <article className="result-card overflow-hidden rounded-[22px] border border-[#ded6c8] bg-[#fffdf8] shadow-[0_12px_28px_rgba(79,58,35,0.06)]" style={{ animationDelay: `${index * 70}ms` }} data-testid={`card-recipe-${recipe.id}`}>
       <div className="h-1.5" style={{ backgroundColor: recipe.accent }} />
@@ -549,8 +577,13 @@ function RecipeCard({ recipe, index, match, onOpen, confirmed, onConfirm }: { re
           <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-[#f7f0e4] px-2.5 py-1 text-[11px] font-medium text-[#796b5a]"><Clock3 size={13} />{recipe.time} min</span>
         </div>
         <p className="mt-4 max-w-[50ch] text-[13px] leading-6 text-[#6f6253]">{recipe.description}</p>
-        {match.missing.length > 0 && match.status !== 'blocked' && (
-          <div className="mt-4 rounded-xl bg-[#fbf2e1] px-3 py-2.5 text-[11px] text-[#806640]"><span className="font-semibold">Still need:</span> {match.missing.join(', ')}{match.substituteHints.length > 0 && <span className="mt-1 block text-[#9b7c50]">Swap tip: {match.substituteHints[0]}</span>}</div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <div className="rounded-xl border border-[#e7ddce] bg-[#fbf8f1] px-3 py-2.5"><span className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[#998875]">Calories</span><span className="mt-1 block text-[11px] font-semibold text-[#5f5041]">{calorieLabel}</span></div>
+          <div className="rounded-xl border border-[#e7ddce] bg-[#fbf8f1] px-3 py-2.5"><span className="block font-mono text-[9px] uppercase tracking-[0.12em] text-[#998875]">Ingredient match</span><span className="mt-1 block text-[11px] font-semibold text-[#195d44]">{statusLabel}</span></div>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-1.5"><span className="mr-1 font-mono text-[9px] uppercase tracking-[0.12em] text-[#998875]">Health tags</span>{(recipe.healthTags ?? []).map((tag) => <span key={tag} className="rounded-full bg-[#edf4e4] px-2.5 py-1 text-[10px] font-medium text-[#416847]">{tag}</span>)}</div>
+        {match.status !== 'blocked' && (
+          <div className={`mt-4 rounded-xl px-3 py-2.5 text-[11px] ${match.missing.length > 0 ? 'bg-[#fbf2e1] text-[#806640]' : 'bg-[#edf4e4] text-[#416847]'}`}><span className="font-semibold">Missing ingredients:</span> {match.missing.length > 0 ? match.missing.join(', ') : 'none — ready to cook'}{match.substituteHints.length > 0 && <span className="mt-1 block text-[#9b7c50]">Swap tip: {match.substituteHints[0]}</span>}</div>
         )}
         {match.status === 'blocked' && <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#fff0eb] px-3 py-2.5 text-[11px] text-[#a65242]"><CircleAlert size={14} /> This recipe uses something you marked to avoid.</div>}
         <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#eee6d9] pt-4">
@@ -633,6 +666,7 @@ export default function RecipePickerApp() {
     navigate('/recipes');
   };
   const [mode, setMode] = useState<Mode>('fuzzy');
+  const [healthGoal, setHealthGoal] = useState<HealthGoal>('none');
   const [entryMode, setEntryMode] = useState<EntryMode>('have');
   const [selected, setSelected] = useState<string[]>([]);
   const [avoided, setAvoided] = useState<string[]>([]);
@@ -654,6 +688,7 @@ export default function RecipePickerApp() {
 
   const allOptions = useMemo(() => ingredients.map((item) => ({ id: item.id, label: item.label, note: item.note, icon: item.icon })), []);
   const selectedLabels = selected.map((id) => ingredientById.get(id)?.label).filter(Boolean) as string[];
+  const selectedHealthGoal = healthGoals.find((goal) => goal.id === healthGoal) ?? healthGoals[0];
   const customResolvedIds = useMemo(() => customItems.flatMap((item) => {
     const query = item.trim().toLowerCase();
     return ingredients.filter((ingredient) => [ingredient.label, ...ingredient.aliases].some((alias) => query === alias.toLowerCase())).map((ingredient) => ingredient.id);
@@ -705,6 +740,14 @@ export default function RecipePickerApp() {
   const displayedRecipes = useMemo(() => {
     const priority = { complete: 0, partial: 1, stretch: 2, blocked: 3 };
     const chosen = new Set([...selected.filter((id) => ingredientById.has(id)), ...customResolvedIds]);
+    const goalScore = (recipe: Recipe) => {
+      const tags = recipe.healthTags ?? [];
+      if (healthGoal === 'lower-calorie') return (tags.includes('light & quick') ? 3 : 0) + (tags.includes('vegetable-forward') ? 2 : 0) + (recipe.calories !== undefined && recipe.calories <= 350 ? 2 : 0);
+      if (healthGoal === 'fat-loss') return (tags.includes('high-protein') ? 3 : 0) + (tags.includes('vegetable-forward') ? 2 : 0) + (tags.includes('light & quick') ? 1 : 0);
+      if (healthGoal === 'muscle-gain') return (tags.includes('high-protein') ? 4 : 0) + (recipe.calories !== undefined && recipe.calories >= 400 ? 2 : 0);
+      if (healthGoal === 'balanced') return (tags.includes('vegetable-forward') ? 2 : 0) + (tags.includes('high-protein') ? 2 : 0) + (tags.includes('satisfying fuel') ? 1 : 0);
+      return 0;
+    };
     return allRecipes
       .filter((recipe) => chosen.size > 0 && recipe.required.some((id) => chosen.has(id)))
       .filter((recipe) => timeFilter === 'all' || (timeFilter === 'quick' ? recipe.time <= 20 : recipe.time > 20))
@@ -717,12 +760,13 @@ export default function RecipePickerApp() {
         const bMatch = getMatch(b);
         if (priority[aMatch.status] !== priority[bMatch.status]) return priority[aMatch.status] - priority[bMatch.status];
         if (bMatch.score !== aMatch.score) return bMatch.score - aMatch.score;
+         if (goalScore(b) !== goalScore(a)) return goalScore(b) - goalScore(a);
         if (clearFridge && aMatch.usedUrgent !== bMatch.usedUrgent) return aMatch.usedUrgent ? -1 : 1;
         if (mode === 'survival' && a.time !== b.time) return a.time - b.time;
         return priority[aMatch.status] - priority[bMatch.status] || bMatch.score - aMatch.score;
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [audienceFilter, avoided, clearFridge, methodFilter, mode, ownedIds, timeFilter, urgent, selected, customResolvedIds]);
+   }, [audienceFilter, avoided, clearFridge, healthGoal, methodFilter, mode, ownedIds, timeFilter, urgent, selected, customResolvedIds]);
 
   const clearAll = () => {
     setSelected([]);
@@ -783,6 +827,10 @@ export default function RecipePickerApp() {
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d9cfbe] bg-[#eef4df] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.13em] text-[#195d44]"><Leaf size={12} /> fresh &amp; healthy</p>
             <h1 className="hand-rule max-w-[740px] pb-4 font-serif text-[clamp(3.2rem,8vw,6.8rem)] font-semibold leading-[.88] tracking-[-0.065em] text-[#33291f]">What can we<br /><span className="text-[#195d44]">cook today?</span></h1>
             <p className="mt-7 max-w-[560px] text-[15px] leading-7 text-[#766856]">Turn your healthy, fresh ingredients into a nourishing meal. Tell us what you have, what you want to use first, and what to avoid. We will craft a sensible next meal.</p>
+             <div className="mt-5 border-l-2 border-[#d4b883] pl-4">
+               <p className="font-serif text-[18px] font-semibold text-[#195d44]">Cook more with what you already have.</p>
+               <p className="mt-1 text-[11px] text-[#887765]">Waste less. Make healthier everyday choices.</p>
+             </div>
             <div className="mt-8 hidden lg:block max-w-[400px]">
               <KitchenTip />
             </div>
@@ -809,6 +857,21 @@ export default function RecipePickerApp() {
               <p className="mt-2 text-sm leading-6 text-[#52694e]">{selectedLabels.length ? `${selectedLabels.slice(0, 6).join(', ')}${selectedLabels.length > 6 ? ` + ${selectedLabels.length - 6} more` : ''}` : 'Your basket is ready for something fresh.'}</p>
             </div>
             <button type="button" onClick={() => navigate('/ingredients')} data-testid="button-choose-ingredients" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#195d44] px-5 py-3 text-sm font-semibold text-white hover:bg-[#124b36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#195d44]">{selectedLabels.length || avoided.length ? 'Edit ingredients' : 'Choose ingredients'} <ArrowUpRight size={17} /></button>
+          </section>
+          <section aria-labelledby="health-goal-title" className="rounded-[22px] border border-[#ded6c8] bg-[#fffaf1] p-5 sm:p-6">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#8c7c68]">A little direction</p>
+                <h2 id="health-goal-title" className="mt-1 font-serif text-[24px] font-semibold text-[#33291f]">What’s your goal today?</h2>
+              </div>
+              <p className="text-[11px] text-[#8a7966]">Ingredients still come first.</p>
+            </div>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+              {healthGoals.map((goal) => <button key={goal.id} type="button" onClick={() => setHealthGoal(goal.id)} aria-pressed={healthGoal === goal.id} className={`min-h-[72px] rounded-2xl border px-3 py-3 text-left transition-all ${healthGoal === goal.id ? 'border-[#195d44] bg-[#edf4e4] shadow-[0_5px_14px_rgba(25,93,68,0.08)]' : 'border-[#e1d7c8] bg-[#fffdf8] hover:border-[#8eaf92]'}`}>
+                <span className="block text-[12px] font-semibold text-[#42372b]">{goal.label}</span>
+                <span className="mt-1 block text-[10px] leading-4 text-[#887765]">{goal.description}</span>
+              </button>)}
+            </div>
           </section>
           
           <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-5">
@@ -936,7 +999,7 @@ export default function RecipePickerApp() {
             <p className="mt-2 text-sm">{allRecipes.length} recipes available, including all 30 from your sheet. {generated && `Your ingredients: ${selectedLabels.join(', ') || customItems.join(', ') || 'none selected'}.`}</p>
             <p className="mt-2 text-sm">Basic seasonings count automatically unless marked “Avoid”. Other missing ingredients are listed on each card. Strict match requires every main ingredient.</p>
           </div>
-          <div className="mb-7 flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#e06b3f]">04 / the good part</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[.94] tracking-[-0.05em] text-[#33291f]">{generated ? 'Here are a few places to start.' : 'Your next meal is hiding in here.'}</h2><p className="mt-3 max-w-[560px] text-[13px] leading-6 text-[#796a59]">{generated ? `Sorted for ${mode === 'fuzzy' ? 'flexible ideas' : mode === 'strict' ? 'your exact basket' : 'the fastest comfort'}${clearFridge && urgent.length ? ' · with use-first items up front' : ''}.` : 'Pick what you have, set a few boundaries, and open any result for step-by-step kitchen mode.'}</p></div><div className="flex flex-wrap gap-2"><FilterButton active={timeFilter === 'all'} onClick={() => setTimeFilter('all')}>Any time</FilterButton><FilterButton active={timeFilter === 'quick'} onClick={() => setTimeFilter('quick')}>15–20 min</FilterButton><FilterButton active={timeFilter === 'slow'} onClick={() => setTimeFilter('slow')}>30+ min</FilterButton></div></div>
+           <div className="mb-7 flex flex-col justify-between gap-4 lg:flex-row lg:items-end"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#e06b3f]">04 / the good part</p><h2 className="mt-2 font-serif text-[clamp(2.2rem,5vw,4rem)] font-semibold leading-[.94] tracking-[-0.05em] text-[#33291f]">{generated ? 'Here are a few places to start.' : 'Your next meal is hiding in here.'}</h2><p className="mt-3 max-w-[560px] text-[13px] leading-6 text-[#796a59]">{generated ? `Sorted for ${mode === 'fuzzy' ? 'flexible ideas' : mode === 'strict' ? 'your exact basket' : 'the fastest comfort'}${healthGoal !== 'none' ? ` · ${selectedHealthGoal.label.toLowerCase()}` : ''}${clearFridge && urgent.length ? ' · with use-first items up front' : ''}.` : 'Pick what you have, set a few boundaries, and open any result for step-by-step kitchen mode.'}</p></div><div className="flex flex-wrap gap-2"><FilterButton active={timeFilter === 'all'} onClick={() => setTimeFilter('all')}>Any time</FilterButton><FilterButton active={timeFilter === 'quick'} onClick={() => setTimeFilter('quick')}>15–20 min</FilterButton><FilterButton active={timeFilter === 'slow'} onClick={() => setTimeFilter('slow')}>30+ min</FilterButton></div></div>
           <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-[#ded3c4] bg-[#f9f4eb] p-3 sm:flex-row sm:items-center sm:justify-between"><div className="flex flex-wrap items-center gap-2"><span className="flex items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><CookingPot size={13} /> method</span>{(['all', 'stir-fry', 'steam', 'boil', 'no-cook', 'air-fryer', 'oven'] as MethodFilter[]).map((value) => <FilterButton key={value} active={methodFilter === value} onClick={() => setMethodFilter(value)}>{value === 'all' ? 'All' : value.replace('-', ' ')}</FilterButton>)}</div><div className="flex items-center gap-2 overflow-x-auto"><span className="flex shrink-0 items-center gap-1.5 px-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#8e7d69]"><Sparkles size={13} /> for</span>{(['all', 'beginner', 'high-protein', 'comfort'] as AudienceFilter[]).map((value) => <FilterButton key={value} active={audienceFilter === value} onClick={() => setAudienceFilter(value)}>{value === 'all' ? 'Everyone' : value.replace('-', ' ')}</FilterButton>)}</div></div>
           <div className="mb-5 flex flex-wrap items-center gap-3">
             <button type="button" onClick={openBook} className="rounded-xl bg-[#195d44] px-4 py-3 font-semibold text-white">My recipe book ({savedRecipes.length})</button>
