@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useRecipeBook } from './useRecipeBook';
+import KitchenTip from './components/KitchenTip';
+import { useLocation } from 'wouter';
 import {
   Apple,
   ArrowUpRight,
@@ -601,6 +603,12 @@ function RecipeDetail({ recipe, match, servings, onServings, wakeLockActive, onW
 }
 
 export default function RecipePickerApp() {
+  const [location, navigate] = useLocation();
+  const isPicker = location === '/';
+  const isResults = location === '/results';
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [location]);
   const { savedIds, storageError, confirm, remove } = useRecipeBook();
   const [bookNotice, setBookNotice] = useState('');
   const savedRecipes = savedIds.flatMap((id) => {
@@ -608,9 +616,7 @@ export default function RecipePickerApp() {
     return recipe ? [recipe] : [];
   });
   const openBook = () => {
-    const book = document.getElementById('my-recipe-book');
-    book?.scrollIntoView({ behavior: 'instant', block: 'start' });
-    book?.focus({ preventScroll: true });
+    navigate('/recipes');
   };
   const [mode, setMode] = useState<Mode>('fuzzy');
   const [entryMode, setEntryMode] = useState<EntryMode>('have');
@@ -620,7 +626,7 @@ export default function RecipePickerApp() {
   const [customInput, setCustomInput] = useState('');
   const [customItems, setCustomItems] = useState<string[]>([]);
   const [searchInput, setSearchInput] = useState('');
-  const [generated, setGenerated] = useState(false);
+  const generated = isResults;
   const [clearFridge, setClearFridge] = useState(true);
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [servings, setServings] = useState(2);
@@ -653,14 +659,12 @@ export default function RecipePickerApp() {
   const filteredCategories = categories.map((category) => ({ ...category, options: category.ids.map((id) => ingredientById.get(id)).filter((item): item is Ingredient => Boolean(item && matchesSearch(item))) })).filter((category) => category.options.length > 0);
 
   const toggleIngredient = (id: string, targetMode: EntryMode = entryMode) => {
-    setGenerated(false);
     if (targetMode === 'avoid') {
       setAvoided((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
       setSelected((current) => current.filter((item) => item !== id));
     } else {
       setSelected((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
       setAvoided((current) => current.filter((item) => item !== id));
-      setGenerated(false);
     }
   };
 
@@ -671,7 +675,6 @@ export default function RecipePickerApp() {
     if (!value || customItems.some((item) => item.toLowerCase() === value.toLowerCase())) return;
     setCustomItems((current) => [...current, value]);
     setCustomInput('');
-    setGenerated(false);
   };
 
   const removeCustom = (value: string) => setCustomItems((current) => current.filter((item) => item !== value));
@@ -713,16 +716,10 @@ export default function RecipePickerApp() {
     setUrgent([]);
     setCustomItems([]);
     setCustomInput('');
-    setGenerated(false);
   };
 
   const generate = () => {
-    setGenerated(true);
-    window.setTimeout(() => {
-      const results = document.getElementById('ideas');
-      results?.scrollIntoView({ behavior: 'instant', block: 'start' });
-      results?.focus({ preventScroll: true });
-    }, 60);
+    navigate('/results');
   };
 
   const toggleWakeLock = async () => {
@@ -749,11 +746,11 @@ export default function RecipePickerApp() {
 
   return (
     <main className="app-shell min-h-[100dvh] overflow-x-hidden pb-20 text-[#33291f]">
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#ded6c8] bg-[#fffaf1] p-3 shadow-lg lg:hidden">
+      {isPicker && <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[#ded6c8] bg-[#fffaf1] p-3 shadow-lg lg:hidden">
         <button type="button" onClick={generate} className="w-full rounded-xl bg-[#195d44] px-4 py-3 font-semibold text-white" data-testid="button-generate-mobile">
           Find my next meal · {selectedLabels.length} ingredients
         </button>
-      </div>
+      </div>}
       <header className="mx-auto flex max-w-[1240px] items-center justify-between px-5 pb-8 pt-6 sm:px-8 lg:px-12">
         <div className="flex items-center gap-2.5"><span className="flex size-10 rotate-[-5deg] items-center justify-center rounded-[14px] bg-[#195d44] text-[#fbf8f1] shadow-[3px_4px_0_#d4b883]"><ChefHat size={21} strokeWidth={1.7} /></span><div><p className="font-serif text-[18px] font-semibold leading-none tracking-[-0.02em]">pinch &amp; pan</p><p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-[#8c7c68]">a tiny recipe notebook</p></div></div>
         <button type="button" onClick={openBook} className="flex shrink-0 items-center gap-2 rounded-xl border border-[#195d44] px-3 py-2 text-xs font-semibold text-[#195d44]" aria-label={`Open my recipe book, ${savedRecipes.length} dishes`}>
@@ -761,10 +758,15 @@ export default function RecipePickerApp() {
         </button>
       </header>
 
+      {!isPicker && <nav aria-label="Recipe navigation" className="mx-auto flex max-w-[1240px] flex-wrap gap-3 px-5 pb-6 sm:px-8 lg:px-12">
+        <button type="button" onClick={() => navigate('/')} className="rounded-xl border border-[#195d44] px-4 py-3 text-sm font-semibold text-[#195d44]">← Edit ingredients</button>
+        {!isResults && <button type="button" onClick={generate} className="rounded-xl bg-[#195d44] px-4 py-3 text-sm font-semibold text-white">View meal results</button>}
+      </nav>}
+      {isPicker && <>
       <section className="mx-auto max-w-[1240px] px-5 pb-10 sm:px-8 lg:px-12 lg:pb-14">
         <div className="grid gap-8 lg:grid-cols-[1fr_300px] lg:items-end">
           <div className="animate-rise"><p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#d9cfbe] bg-[#fbf7ee] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.13em] text-[#195d44]"><Search size={12} /> dinner, improvised</p><h1 className="hand-rule max-w-[740px] pb-4 font-serif text-[clamp(3.2rem,8vw,6.8rem)] font-semibold leading-[.88] tracking-[-0.065em] text-[#33291f]">What can we<br /><span className="text-[#195d44]">make from this?</span></h1><p className="mt-7 max-w-[560px] text-[15px] leading-7 text-[#766856]">Tell us what you have, what you want to use first, and what to leave out. We will turn it into a sensible next meal.</p></div>
-          <aside className="animate-float hidden rounded-[22px] border border-[#ded6c8] bg-[#eee6d7] p-5 lg:block"><div className="mb-5 flex items-center justify-between"><span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#8a7966]">the house note</span><NotebookPen size={17} className="text-[#e06b3f]" /></div><p className="font-serif text-[21px] font-semibold leading-[1.18] text-[#195d44]">“Good cooking is mostly noticing what you already have.”</p><div className="mt-5 h-px w-12 bg-[#d4b883]" /><p className="mt-3 text-[11px] leading-5 text-[#887765]">The closer the match, the less thinking dinner needs.</p></aside>
+          <KitchenTip />
         </div>
       </section>
 
@@ -808,7 +810,6 @@ export default function RecipePickerApp() {
                 <div className="mt-3 flex flex-wrap gap-2">
                   {[...defaultPantry].map((id) => <button key={id} type="button" aria-pressed={!avoided.includes(id)} onClick={() => {
                     setAvoided((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
-                    setGenerated(false);
                   }} className={`flex min-h-11 items-center gap-2 rounded-xl border px-3 py-2 text-xs font-semibold ${avoided.includes(id) ? 'border-[#c45a48] bg-[#fff0eb] text-[#a34d3c]' : 'border-[#a6ba94] bg-white text-[#195d44]'}`}>
                     {avoided.includes(id) ? <ShieldAlert size={15} /> : <Check size={15} />}
                     {ingredientById.get(id)?.label} · {avoided.includes(id) ? 'Avoid' : 'On hand'}
@@ -830,7 +831,7 @@ export default function RecipePickerApp() {
         <aside className="lg:sticky lg:top-5 lg:self-start">
           <div className="rounded-[26px] border border-[#d8cebe] bg-[#efe7d9] p-4 shadow-[0_18px_40px_rgba(79,58,35,0.06)] sm:p-5">
             <div className="mb-4 flex items-center justify-between"><div><p className="font-mono text-[10px] uppercase tracking-[0.17em] text-[#8d7b67]">your kitchen</p><h2 className="mt-1 font-serif text-[22px] font-semibold text-[#33291f]">What kind of help?</h2></div><span className="flex size-9 items-center justify-center rounded-xl bg-[#f8f2e8] text-[#e06b3f]"><Refrigerator size={18} /></span></div>
-            <div className="space-y-2">{modes.map((item) => <button key={item.id} type="button" onClick={() => { setMode(item.id); setGenerated(false); }} className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition-all ${mode === item.id ? 'border-[#195d44] bg-[#f7fbef] shadow-[0_5px_14px_rgba(25,93,68,0.08)]' : 'border-[#ddd2c2] bg-[#f7f1e7] hover:border-[#b8aa97]'}`} aria-pressed={mode === item.id}><span className={`font-mono text-[10px] ${mode === item.id ? 'text-[#e06b3f]' : 'text-[#9a8a77]'}`}>{item.mark}</span><span className="min-w-0 flex-1"><span className="block text-[13px] font-semibold text-[#42372b]">{item.label}</span><span className="mt-0.5 block text-[11px] text-[#8a7966]">{item.description}</span></span><span className={`size-2 rounded-full ${mode === item.id ? 'bg-[#195d44]' : 'bg-[#d1c5b4]'}`} /></button>)}</div>
+            <div className="space-y-2">{modes.map((item) => <button key={item.id} type="button" onClick={() => setMode(item.id)} className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition-all ${mode === item.id ? 'border-[#195d44] bg-[#f7fbef] shadow-[0_5px_14px_rgba(25,93,68,0.08)]' : 'border-[#ddd2c2] bg-[#f7f1e7] hover:border-[#b8aa97]'}`} aria-pressed={mode === item.id}><span className={`font-mono text-[10px] ${mode === item.id ? 'text-[#e06b3f]' : 'text-[#9a8a77]'}`}>{item.mark}</span><span className="min-w-0 flex-1"><span className="block text-[13px] font-semibold text-[#42372b]">{item.label}</span><span className="mt-0.5 block text-[11px] text-[#8a7966]">{item.description}</span></span><span className={`size-2 rounded-full ${mode === item.id ? 'bg-[#195d44]' : 'bg-[#d1c5b4]'}`} /></button>)}</div>
             <div className="my-5 h-px bg-[#d9cebd]" />
             <div className="flex items-center justify-between gap-3"><div><p className="font-mono text-[10px] uppercase tracking-[0.15em] text-[#8d7b67]">basket</p><p className="mt-1 text-[12px] text-[#756654]">{selected.length || customItems.length ? `${selected.length + customItems.length} clues ready` : 'Nothing selected yet'}</p></div>{(selected.length > 0 || avoided.length > 0 || customItems.length > 0) && <button type="button" onClick={clearAll} className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#9b6950] hover:text-[#e06b3f]"><RotateCcw size={13} /> Clear</button>}</div>
             {selected.length > 0 && <div className="mt-3 flex max-h-24 flex-wrap gap-1.5 overflow-y-auto">{selected.map((id) => <button key={id} type="button" onClick={() => toggleUrgent(id)} title={urgent.includes(id) ? 'Use first' : 'Mark to use first'} className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${urgent.includes(id) ? 'bg-[#f4d5c7] text-[#b95741]' : 'bg-[#f8f0e4] text-[#776653]'}`}>{ingredientById.get(id)?.label}{urgent.includes(id) && ' · first'}</button>)}</div>}
@@ -843,7 +844,8 @@ export default function RecipePickerApp() {
         </aside>
       </div>
 
-      <section id="ideas" tabIndex={-1} className="border-t border-[#ded6c8] bg-[#f1eadf] px-5 py-12 outline-none sm:px-8 lg:px-12 lg:py-16">
+      </>}
+      {isResults && <section id="ideas" tabIndex={-1} className="border-t border-[#ded6c8] bg-[#f1eadf] px-5 py-12 outline-none sm:px-8 lg:px-12 lg:py-16">
         <div className="mx-auto max-w-[1240px]">
           <div role="status" className="mb-6 rounded-2xl border border-[#195d44] bg-[#edf4e4] p-5 text-[#195d44]">
             <p className="text-lg font-bold">{generated ? `${displayedRecipes.length} matching recipes found` : 'Choose ingredients, then find your meal'}</p>
@@ -873,17 +875,15 @@ export default function RecipePickerApp() {
               {mode !== 'fuzzy' && <button type="button" onClick={() => setMode('fuzzy')} className="rounded-xl bg-[#195d44] px-4 py-3 text-sm font-semibold text-white">Try fuzzy match</button>}
               {(timeFilter !== 'all' || methodFilter !== 'all' || audienceFilter !== 'all') && <button type="button" onClick={() => { setTimeFilter('all'); setMethodFilter('all'); setAudienceFilter('all'); }} className="rounded-xl border border-[#195d44] bg-white px-4 py-3 text-sm font-semibold text-[#195d44]">Clear recipe filters</button>}
               <button type="button" onClick={() => {
-                const picker = document.getElementById('ingredient-picker');
-                picker?.scrollIntoView({ behavior: 'instant', block: 'start' });
-                picker?.focus({ preventScroll: true });
+                navigate('/');
               }} className="rounded-xl border border-[#cdbfae] bg-white px-4 py-3 text-sm font-semibold text-[#5b4b3b]">Choose ingredients</button>
             </div>
           </div>}
           <div className="mt-9 flex items-center justify-center gap-2 text-center font-mono text-[10px] uppercase tracking-[0.13em] text-[#a08f7b]"><span className="h-px w-8 bg-[#d4c7b6]" /><span>keep tinkering</span><span className="h-px w-8 bg-[#d4c7b6]" /></div>
         </div>
-      </section>
+      </section>}
 
-      <section id="my-recipe-book" tabIndex={-1} aria-labelledby="recipe-book-title" className="mx-auto max-w-[1240px] px-5 py-12 outline-none sm:px-8 lg:px-12">
+      {location === '/recipes' && <section id="my-recipe-book" tabIndex={-1} aria-labelledby="recipe-book-title" className="mx-auto max-w-[1240px] px-5 py-12 outline-none sm:px-8 lg:px-12">
         <h2 id="recipe-book-title" className="font-serif text-3xl font-semibold text-[#195d44]">My recipe book ({savedRecipes.length})</h2>
         <p className="mt-3 text-sm text-[#766856]">All your confirmed dishes, saved in this browser. Changing ingredients or clearing your basket will not remove them.</p>
         {storageError && <p role="alert" className="mt-3 text-sm text-red-700">{storageError}</p>}
@@ -899,7 +899,7 @@ export default function RecipePickerApp() {
               </div>
             </article>)}
           </div>}
-      </section>
+      </section>}
       <footer className="mx-auto flex max-w-[1240px] flex-col gap-3 px-5 py-8 text-[11px] text-[#8d7b67] sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12"><p className="font-serif text-[16px] font-semibold text-[#195d44]">pinch &amp; pan</p><p>Made for the “what do I have?” moment.</p></footer>
       {selectedRecipe && <RecipeDetail recipe={selectedRecipe} match={getMatch(selectedRecipe)} servings={servings} onServings={setServings} wakeLockActive={wakeLockActive} onWakeLock={toggleWakeLock} timerSeconds={timerSeconds} timerLabel={timerLabel} onStartTimer={startTimer} onClose={() => setSelectedRecipe(null)} />}
     </main>
